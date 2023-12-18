@@ -1,0 +1,56 @@
+body {
+    background-color: #FFECD6;
+    color:#0F2167;
+}
+
+.navbar {
+    background-color: #0F2167 !important;
+}
+
+.login-container {
+    width: 350px;
+    margin: auto;
+    margin-top: 50px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #4CB9E7;
+}
+
+.login-container.register {
+    width: 550px !important;
+}
+
+.login-container.save-advert {
+    width: 1350px !important;
+}
+.save-advert-wid {
+    width: 450px !important;
+}
+
+.btn {
+    color: white !important;
+    background-color: #3559E0 !important;
+}
+
+.btn:hover {
+    background-color: #243fa3 !important;
+}
+
+.table {
+    --bs-table-bg: #4CB9E7;
+    --bs-table-border-color: transparent;
+    --bs-table-color:#0F2167 ;
+}
+
+.table-img {
+    max-width: 90px;
+    max-height: 50px;
+}   
+.td-photo {
+    width: 100px;
+}
+.td-button {
+    width: 65px;
+    text-align: center;
+}
