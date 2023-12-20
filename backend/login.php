@@ -3,7 +3,7 @@
 $servername = "localhost";
 $usernameDB = "root";
 $passwordDB = "";
-$dbname = "phpproject";
+$dbname = "advertphp";
 
 // Create a connection
 $conn = new mysqli($servername, $usernameDB, $passwordDB, $dbname);
@@ -34,18 +34,18 @@ if ($result->num_rows > 0) {
         $_SESSION['user_id'] = $row['user_id'];
 
         // İsteği başka bir sayfaya yönlendir
-        header('Location: http://localhost/phpProject/index.php');
+        header('Location: http://localhost/AdvertSitePhp/index.php');
         exit();
     } else {
         // Kullanıcı doğrulanamadı, hata mesajını göster ve işlemi sonlandır
         echo '<script>alert("Wrong username or password.");</script>';
-        echo '<script>window.location.href = "http://localhost/phpProject/login.php";</script>';
+        echo '<script>window.location.href = "http://localhost/AdvertSitePhp/login.php";</script>';
         exit();
     }
 } else {
     // Kullanıcı bulunamadı, hata mesajını göster ve işlemi sonlandır
     echo '<script>alert("Wrong username or password.");</script>';
-    echo '<script>window.location.href = "http://localhost/phpProject/login.php";</script>';
+    echo '<script>window.location.href = "http://localhost/AdvertSitePhp/login.php";</script>';
     exit();
 }
 

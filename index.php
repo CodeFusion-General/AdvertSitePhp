@@ -11,8 +11,6 @@
     <?php include_once("navbar.php"); ?>
     
     <?php
-    // Oturumu başlat
-    session_start();
 
     // Giriş durumunu kontrol et
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {

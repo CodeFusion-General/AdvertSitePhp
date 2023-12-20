@@ -14,12 +14,31 @@ body {
   font-size: 1rem;
   padding: 0.5rem 1rem;
 }
-
+.nav-greeting {
+  color: #ffffff;
+  font-family: "Arial", sans-serif;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
 .nav-link:hover {
   background-color: #3a5a78;
   color: #dcdcdc;
 }
-
+.dropdown-item {
+  color: #ffffff;
+  font-family: "Arial", sans-serif;
+}
+.dropdown-item:hover {
+  color: #ffffff;
+  font-family: "Arial", sans-serif;
+}
+.dropdown-menu {
+  background-color: #2b3035;
+}
+.dropdown-menu a:hover {
+  background-color: #3a5a78;
+  color: #dcdcdc;
+}
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem;
@@ -85,9 +104,9 @@ body {
 }
 
 .table {
-  --bs-table-bg: #4cb9e7;
+  --bs-table-bg: #f8f9fa;
   --bs-table-border-color: transparent;
-  --bs-table-color: #0f2167;
+  --bs-table-color: #333333;
 }
 
 .table-img {

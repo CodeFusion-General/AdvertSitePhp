@@ -5,7 +5,7 @@ ini_set('display_errors', '1');
 session_start();
 
 // Check if the user is not logged in
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === false) {
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
     // Redirect to the login page or any other page
     header("Location: login.php");
     exit(); // Stop further execution of the script
@@ -17,7 +17,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === false) {
 <!DOCTYPE html>
 <html lang="en">
 <?php
-$pageTitle = "Save Advert";
+$pageTitle = "New Advert";
 include 'head.php';
 ?>
 
