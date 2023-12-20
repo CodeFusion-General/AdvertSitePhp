@@ -1,12 +1,14 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <?php
 $pageTitle = "Login";
 include 'head.php';
 ?>
-
+<style>
+    .login-container {
+        margin-top: 100px;
+    }
+</style>
 <body>
     <?php include_once("navbar.php"); ?>
     <div class="container login-container" style="width: 450px;">
@@ -20,10 +22,8 @@ include 'head.php';
                 <label for="password" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" id="password">
             </div>
-            <div class="btn-group" role="group">
                 <button type="submit" class="btn">Login</button>
-                <a href="register.php" class="btn">Register</a>
-            </div>
+                <a href="register.php" class="btn float-right">Register</a>
         </form>
     </div>
 </body>

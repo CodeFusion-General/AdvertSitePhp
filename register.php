@@ -42,7 +42,8 @@
                 <label for="birthdate" class="form-label">Birthdate</label>
                 <input type="date" name="birthdate" class="form-control" id="birthdate">
             </div>
-        <button type="submit" class="btn">Register</button>
+            <button type="submit" class="btn">Register</button>
+            <a href="login.php" class="btn float-right">Back to Login</a>
         </form>
     </div>
 </body>

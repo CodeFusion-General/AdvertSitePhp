@@ -1,56 +1,103 @@
 body {
-    background-color: #FFECD6;
-    color:#0F2167;
+  background-color: #f0f2f5;
+  color: #333333;
 }
 
 .navbar {
-    background-color: #0F2167 !important;
+  background-color: #4a76a8;
+  border-bottom: 2px solid #3a5a78;
+}
+
+.nav-link {
+  color: #ffffff;
+  font-family: "Arial", sans-serif;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link:hover {
+  background-color: #3a5a78;
+  color: #dcdcdc;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+}
+.float-right {
+  float: right;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 .login-container {
-    width: 350px;
-    margin: auto;
-    margin-top: 50px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #4CB9E7;
+  width: 350px;
+  margin: auto;
+  margin-top: 50px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #4cb9e7;
 }
 
 .login-container.register {
-    width: 550px !important;
+  width: 550px !important;
 }
 
 .login-container.save-advert {
-    width: 1350px !important;
+  width: 1350px !important;
 }
 .save-advert-wid {
-    width: 450px !important;
+  width: 450px !important;
+}
+
+.login-container {
+  max-width: 100%;
+  width: auto;
+  padding: 40px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #ced4da;
 }
 
 .btn {
-    color: white !important;
-    background-color: #3559E0 !important;
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 5px;
 }
 
 .btn:hover {
-    background-color: #243fa3 !important;
+  background-color: #5a6268;
+  border-color: #545b62;
 }
 
 .table {
-    --bs-table-bg: #4CB9E7;
-    --bs-table-border-color: transparent;
-    --bs-table-color:#0F2167 ;
+  --bs-table-bg: #4cb9e7;
+  --bs-table-border-color: transparent;
+  --bs-table-color: #0f2167;
 }
 
 .table-img {
-    max-width: 90px;
-    max-height: 50px;
-}   
+  max-width: 90px;
+  max-height: 50px;
+}
 .td-photo {
-    width: 100px;
+  width: 100px;
 }
 .td-button {
-    width: 65px;
-    text-align: center;
+  width: 65px;
+  text-align: center;
 }
