@@ -1,5 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    session_start();
     // Assuming you have a MySQL database, modify the following variables accordingly
     $servername = "localhost";
     $username = "root";
@@ -27,15 +28,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Insert data into the database
-    $sql1 = "INSERT INTO advert (user_id, title, description) VALUES ('1','$title', '$description')";
+    $sql1 = "INSERT INTO advert (user_id, title, description) VALUES ('{$_SESSION['user_id']}', '$title', '$description')";
 
     if ($conn->query($sql1) === TRUE) {
         echo "Data inserted successfully <br>";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
+
+    $sql = "SELECT id FROM advert WHERE title='$title' and description='$description'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $advert_id = $row["id"];
+        }
+    } else {
+        echo "Data not found.";
+    }
     foreach ($featuresArray as $key => $value) {
-        $sql2 = "INSERT INTO advert_field (advert_id, name, value) VALUES ('11','$key', '$value')";
+        $sql2 = "INSERT INTO advert_field (advert_id, name, value) VALUES ('$advert_id','$key', '$value')";
         if ($conn->query($sql2) === TRUE) {
             echo "Data inserted successfully <br>";
         } else {
@@ -48,17 +60,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!empty($photo) && is_uploaded_file($photo)) {
                 // Read the contents of the file
                 $pht = file_get_contents($photo);
-    
+
                 // Insert data into the database
-                $stmt3 = $conn->prepare("INSERT INTO advert_photo (advert_id, photo) VALUES ('11', ?)");
+                $stmt3 = $conn->prepare("INSERT INTO advert_photo (advert_id, photo) VALUES ('$advert_id', ?)");
                 $stmt3->bind_param("s", $pht);
-    
+
                 if ($stmt3->execute()) {
                     echo "Data for photo $index inserted successfully <br>";
                 } else {
                     echo "Error inserting data for photo $index: " . $stmt3->error . "<br>";
                 }
-    
+
                 // Close the statement
                 $stmt3->close();
             } else {

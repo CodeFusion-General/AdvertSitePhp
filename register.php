@@ -9,7 +9,7 @@
     
     <div class="container login-container register">
         <h1>Register</h1>
-        <form>
+        <form action="./backend/register.php" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" name="username" class="form-control" id="username">
@@ -40,7 +40,7 @@
             </div>
             <div class="mb-3">
                 <label for="birthdate" class="form-label">Birthdate</label>
-                <input type="date" name="birtdate" class="form-control" id="birthdate">
+                <input type="date" name="birthdate" class="form-control" id="birthdate">
             </div>
         <button type="submit" class="btn">Register</button>
         </form>

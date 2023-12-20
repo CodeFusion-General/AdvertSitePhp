@@ -1,10 +1,25 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+// Start the session (if not already started)
+session_start();
+
+// Check if the user is not logged in
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === false) {
+    // Redirect to the login page or any other page
+    header("Location: login.php");
+    exit(); // Stop further execution of the script
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <?php
 $pageTitle = "Save Advert";
 include 'head.php';
 ?>
-
 <body>
     <?php include_once("navbar.php"); ?>
     <div class="container">
@@ -41,54 +56,6 @@ include 'head.php';
             </div>
         </form>
     </div>
-    <!-- <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                // Formdan gelen verileri al
-                $title = $_POST["title"];
-                $description = $_POST["description"];
-                $photos = isset($_FILES["photo"]) ? $_FILES["photo"] : array();
-                // Eklenen text box'ları al
-                $names = isset($_POST["names"]) ? $_POST["names"] : array();
-                $values = isset($_POST["values"]) ? $_POST["values"] : array();
-                // Yeni text box'ları key-value çiftleri olarak birleştir
-                $featuresArray = array();
-                for ($i = 0; $i < count($names); $i++) {
-                    $featuresArray[$names[$i]] = $values[$i];
-                }
-                if (isset($_FILES["photo"]) && is_array($_FILES["photo"]) && !empty($_FILES["photo"])) {
-                    for ($i = 0; $i < count($photos["name"]); $i++) {
-                        $photo = $photos["name"][$i];
-                        $photoTmpName = $photos["tmp_name"][$i];
-                        $photoError = $photos["error"][$i];
-                        $photoSize = $photos["size"][$i];
-                        $photoType = $photos["type"][$i];
-                        $photoExtension = pathinfo($photo, PATHINFO_EXTENSION);
-                        $photoName = uniqid() . "." . $photoExtension;
-                        $photoDestination = "uploads/" . $photoName;
-                        echo '<img src="' . $photoDestination . '" alt="Uploaded Photo"><br>';
-                        move_uploaded_file($photoTmpName, $photoDestination);
-                    }
-                }
-
-                // Şimdi, $title, $description ve $newTextBoxKeyValueArray içindeki verileri kullanabilirsiniz.
-
-                // Örnek olarak, ekrana yazdıralım:
-                echo "Title: " . $title . "<br>";
-                echo "Description: " . $description . "<br>";
-
-                // Yeni text box'ları ekrana yazdır
-                foreach ($featuresArray as $key => $value) {
-                    echo "Features Key: " . $key . ", Value: " . $value . "<br>";
-                }
-                foreach ($photos["name"] as $photo) {
-                    echo "Photo: " . $photo . "<br>";
-                }
-            } else {
-                // Eğer form POST yöntemiyle gelmediyse, uygun bir işlem yapabilirsiniz.
-                echo "Form submission error!";
-            }
-            ?> -->
-
 
     <script>
         let features = 0;
