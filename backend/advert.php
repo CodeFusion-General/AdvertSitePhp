@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Process form data
     $title = $_POST["title"];
     $description = $_POST["description"];
+    $price = $_POST['price'];
     $photos = isset($_FILES["photo"]) ? $_FILES["photo"] : array();
     $names = isset($_POST["names"]) ? $_POST["names"] : array();
     $values = isset($_POST["values"]) ? $_POST["values"] : array();
@@ -27,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $featuresArray[$names[$i]] = $values[$i];
     }
 
-    // Insert data into the database
-    $sql1 = "INSERT INTO advert (user_id, title, description) VALUES ('{$_SESSION['user_id']}', '$title', '$description')";
+    // SQL sorgusunu oluşturun
+    $sql1 = "INSERT INTO advert (user_id, title, description, price) VALUES ('{$_SESSION['user_id']}', '$title', '$description', '$price')";
 
     if ($conn->query($sql1) === TRUE) {
         echo "Data inserted successfully <br>";
@@ -62,17 +63,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $pht = file_get_contents($photo);
 
                 // Insert data into the database
-                $stmt3 = $conn->prepare("INSERT INTO advert_photo (advert_id, photo) VALUES ('$advert_id', ?)");
-                $stmt3->bind_param("s", $pht);
+                $sql3 = $conn->prepare("INSERT INTO advert_photo (advert_id, photo) VALUES ('$advert_id', ?)");
+                $sql3->bind_param("s", $pht);
 
-                if ($stmt3->execute()) {
+                if ($sql3->execute()) {
                     echo "Data for photo $index inserted successfully <br>";
                 } else {
-                    echo "Error inserting data for photo $index: " . $stmt3->error . "<br>";
+                    echo "Error inserting data for photo $index: " . $sql3->error . "<br>";
                 }
 
                 // Close the statement
-                $stmt3->close();
+                $sql3->close();
             } else {
                 echo "Error for photo $index: File not uploaded or path is empty <br>";
             }

@@ -20,6 +20,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === false) {
 $pageTitle = "Save Advert";
 include 'head.php';
 ?>
+
 <body>
     <?php include_once("navbar.php"); ?>
     <div class="container">
@@ -42,7 +43,10 @@ include 'head.php';
                         <label for="description" class="form-label">Description</label>
                         <textarea name="description" class="form-control" id="description" rows="3"></textarea>
                     </div>
-
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="text" name="price" class="form-control" id="price" oninput="validatePrice(this)">
+                    </div>
                 </div>
             </div>
             <div class="col-4">
@@ -51,7 +55,7 @@ include 'head.php';
                 </div>
             </div>
             <div style="text-align: center;" class="col-12">
-                <button type="button" class="btn" onclick="addTextBoxes()">Add Textboxes</button>
+                <button type="button" class="btn" onclick="addTextBoxes()">Add Feature</button>
                 <button type="submit" class="btn">Save Advert</button>
             </div>
         </form>
@@ -72,6 +76,17 @@ include 'head.php';
             featuresdiv.append(TextBox);
         }
 
+        function validatePrice(input) {
+            // Alınan değeri kontrol etmek için bir düzenli ifade kullanın
+            var regex = /^[0-9]+$/;
+
+            if (input.value.trim() !== "" && !regex.test(input.value)) {
+                // Eğer giriş matematiksel karakterler içermiyorsa
+                alert("Please enter a valid numeric value for the price.");
+                // İsterseniz aşağıdaki satırı kullanarak hatalı girişi temizleyebilirsiniz
+                input.value = input.value.replace(/[^\d]/g, '');
+            }
+        }
         // Diğer fonksiyonlar buraya eklenir...
 
         $(document).ready(function() {
