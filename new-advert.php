@@ -45,7 +45,10 @@ include 'head.php';
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label">Price</label>
-                        <input type="text" name="price" class="form-control" id="price" oninput="validatePrice(this)">
+                        <div class="input-group">
+                            <input type="text" name="price" class="form-control" id="price" oninput="validatePrice(this)">
+                            <span class="input-group-text">$</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,10 +66,13 @@ include 'head.php';
 
     <script>
         let features = 0;
-        let featuresData = []; // Dizi, eklenen textbox'ların verilerini saklamak için
 
         // Yeni eklenen butonun işlevini gerçekleştiren JavaScript fonksiyonu
         function addTextBoxes() {
+            features++;
+            if (features === 1) {
+                checkFeatures();
+            }
             var featuresdiv = $("#features");
 
             // Yeni metin kutularını ekleyin
@@ -74,6 +80,7 @@ include 'head.php';
 
             // Yeni metin kutularını formun içine ekleyin
             featuresdiv.append(TextBox);
+
         }
 
         function validatePrice(input) {
@@ -87,7 +94,6 @@ include 'head.php';
                 input.value = input.value.replace(/[^\d]/g, '');
             }
         }
-        // Diğer fonksiyonlar buraya eklenir...
 
         $(document).ready(function() {
             // Dosya seçildiğinde
@@ -119,8 +125,25 @@ include 'head.php';
                     adaptiveHeight: true
                 });
             });
+
+            // Check if the features div is empty when the page loads
+            checkFeatures();
         });
+
+        // Function to check if the features div is empty and add a message
+        function checkFeatures() {
+            var featuresdiv = $("#features");
+
+            if (features === 0) {
+                // If empty, add a message
+                featuresdiv.html('<h1 class="col-12" style="text-align: center;">Features</h1><p class="col-12" style="text-align: center;">This section is currently empty.</p>');
+            } else {
+                // If not empty, remove the message
+                featuresdiv.html('<h1 class="col-12" style="text-align: center;">Features</h1>');
+            }
+        }
     </script>
+
 
 </body>
 

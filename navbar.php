@@ -24,7 +24,7 @@ if (!isset($_SESSION)) {
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="adverts.php">Adverts</a></li>
-                        <li><a class="dropdown-item" href="#">My Adverts</a></li>
+                        <li><a class="dropdown-item" href="my-adverts.php?userId=<?php echo $_SESSION['user_id']; ?>">My Adverts</a></li>
                         <li><a class="dropdown-item" href="new-advert.php">New Advert</a></li>
                     </ul>
                 </li>

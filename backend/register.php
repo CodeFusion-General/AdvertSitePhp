@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($conn->query($sql) === TRUE) {
         echo "Registration successful!";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        die("Error: " . $sql . "<br>" . $conn->error);
     }
 
     $sql1 = "SELECT id FROM user WHERE (email = '$email' AND name = '$name' AND surname = '$surname' AND phone = '$phone' AND address = '$address' AND birthdate = '$birthdate')";
@@ -49,9 +49,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql2 = "INSERT INTO account (user_id, username, password) VALUES ('$user_id', '$username', '$hashedPassword')";
 
     if ($conn->query($sql2) === TRUE) {
-        echo "Data inserted successfully <br>";
+        echo '<script>alert("Registration successful!");</script>';
+        echo '<script>window.location.href = "http://localhost/AdvertSitePhp/login.php";</script>';
     } else {
-        echo "Error: " . $sql2 . "<br>" . $conn->error;
+        die("Error: " . $sql2 . "<br>" . $conn->error);
     }
 
     // Close the database connection

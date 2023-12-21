@@ -1,12 +1,12 @@
 <?php
 // Veritabanı bağlantısı
 $servername = "localhost";
-$usernameDB = "root";
-$passwordDB = "";
+$username = "root";
+$password = "";
 $dbname = "advertphp";
 
 // Create a connection
-$conn = new mysqli($servername, $usernameDB, $passwordDB, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Bağlantı kontrolü
 if ($conn->connect_error) {

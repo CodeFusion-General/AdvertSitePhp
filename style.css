@@ -116,6 +116,9 @@ body {
 .td-photo {
   width: 100px;
 }
+.td-title {
+  width: 200px;
+}
 .td-button {
   width: 65px;
   text-align: center;

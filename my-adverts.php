@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-$pageTitle = "Adverts";
+$pageTitle = "My Adverts";
 include 'head.php';
-
-// Database connection details
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "advertphp";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Fetch data from the database using a LEFT JOIN to include the first photo for each advert
-$sql = "SELECT advert.*, MIN(advert_photo.photo) AS first_photo
-        FROM advert
-        LEFT JOIN advert_photo ON advert.id = advert_photo.advert_id
-        GROUP BY advert.id"; // Assuming advert_id is the common column
-$result = $conn->query($sql);
-
 ?>
 
 <body>
     <?php include_once("navbar.php"); ?>
+    <?php
+
+    // Database connection details
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "advertphp";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Fetch data from the database using a LEFT JOIN to include the first photo for each advert
+    $sql = "SELECT advert.*, MIN(advert_photo.photo) AS first_photo
+        FROM advert
+        LEFT JOIN advert_photo ON advert.id = advert_photo.advert_id
+        WHERE user_id = " . $_SESSION['user_id'] . "
+        GROUP BY advert.id";
+    $result = $conn->query($sql);
+
+    ?>
     <div class="container login-container save-advert row">
         <div class="col-12">
-            <h1 style="text-align: center;">Adverts</h1>
+            <h1 style="text-align: center;">My Adverts</h1>
         </div>
         <div class="col-12">
             <div>
@@ -50,7 +53,6 @@ $result = $conn->query($sql);
                         if ($result->num_rows === 0) {
                             echo "<tr><td colspan='5' style='text-align: center;'>No adverts found</td></tr>";
                         }
-                        
                         // Loop through the data and display it in the table
                         while ($row = $result->fetch_assoc()) {
                         ?>
