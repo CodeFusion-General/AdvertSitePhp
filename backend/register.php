@@ -1,19 +1,17 @@
 <?php
-// Establish a connection to the database
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "advertphp";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Process form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "advertphp";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check the connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
     // Retrieve form data
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -24,38 +22,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address = $_POST["address"];
     $birthdate = $_POST["birthdate"];
 
-    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-    // Insert data into the 'users' table
-    $sql = "INSERT INTO user (email, name, surname, phone, address, birthdate)
-            VALUES ('$email', '$name', '$surname', '$phone', '$address', '$birthdate')";
+    // Check if the username already exists
+    $checkUsernameSql = "SELECT id FROM account WHERE username = '$username'";
+    $resultUsername = $conn->query($checkUsernameSql);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Registration successful!";
+    if ($resultUsername->num_rows > 0) {
+        // Username already exists, show an alert
+        echo '<script>alert("Username already exists. Please choose a different username.");</script>';
+        echo '<script>window.location.href = "http://localhost/AdvertSitePhp/register.php";</script>';
     } else {
-        die("Error: " . $sql . "<br>" . $conn->error);
-    }
+        // Username is unique, proceed with registration
 
-    $sql1 = "SELECT id FROM user WHERE (email = '$email' AND name = '$name' AND surname = '$surname' AND phone = '$phone' AND address = '$address' AND birthdate = '$birthdate')";
-    $result = $conn->query($sql1);
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $user_id = $row["id"];
+        // Insert data into the 'users' table
+        $sql = "INSERT INTO user (email, name, surname, phone, address, birthdate)
+                VALUES ('$email', '$name', '$surname', '$phone', '$address', '$birthdate')";
+
+        if ($conn->query($sql) === TRUE) {
+            // Get the user ID
+            $sql1 = "SELECT id FROM user WHERE (email = '$email' AND name = '$name' AND surname = '$surname' AND phone = '$phone' AND address = '$address' AND birthdate = '$birthdate')";
+            $result = $conn->query($sql1);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $user_id = $row["id"];
+                }
+            } else {
+                echo "Data not found.";
+            }
+
+            // Insert data into the 'account' table
+            $sql2 = "INSERT INTO account (user_id, username, password) VALUES ('$user_id', '$username', '$hashedPassword')";
+
+            if ($conn->query($sql2) === TRUE) {
+                echo '<script>alert("Registration successful!");</script>';
+                echo '<script>window.location.href = "http://localhost/AdvertSitePhp/login.php";</script>';
+            } else {
+                die("Error: " . $sql2 . "<br>" . $conn->error);
+            }
+        } else {
+            die("Error: " . $sql . "<br>" . $conn->error);
         }
-    } else {
-        echo "Data not found.";
-    }
-
-    $sql2 = "INSERT INTO account (user_id, username, password) VALUES ('$user_id', '$username', '$hashedPassword')";
-
-    if ($conn->query($sql2) === TRUE) {
-        echo '<script>alert("Registration successful!");</script>';
-        echo '<script>window.location.href = "http://localhost/AdvertSitePhp/login.php";</script>';
-    } else {
-        die("Error: " . $sql2 . "<br>" . $conn->error);
     }
 
     // Close the database connection
     $conn->close();
 }
-?>
