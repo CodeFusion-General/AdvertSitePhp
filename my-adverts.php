@@ -9,21 +9,17 @@ include 'head.php';
     <?php include_once("navbar.php"); ?>
     <?php
 
-    // Database connection details
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "advertphp";
 
-    // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Fetch data from the database using a LEFT JOIN to include the first photo for each advert
     $sql = "SELECT advert.*, MIN(advert_photo.photo) AS first_photo
         FROM advert
         LEFT JOIN advert_photo ON advert.id = advert_photo.advert_id
@@ -53,7 +49,7 @@ include 'head.php';
                         if ($result->num_rows === 0) {
                             echo "<tr><td colspan='5' style='text-align: center;'>No adverts found</td></tr>";
                         }
-                        // Loop through the data and display it in the table
+
                         while ($row = $result->fetch_assoc()) {
                         ?>
                             <tr>
@@ -73,7 +69,7 @@ include 'head.php';
                             </tr>
                         <?php
                         }
-                        // Close the database connection
+                        
                         $conn->close();
                         ?>
                     </tbody>

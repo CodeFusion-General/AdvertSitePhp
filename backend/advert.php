@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $title = $_POST["title"];
     $description = $_POST["description"];
-    $price = $_POST['price'];
+    $price = str_replace(',', '.', $_POST['price']);
     $photos = isset($_FILES["photo"]) ? $_FILES["photo"] : array();
     $names = isset($_POST["names"]) ? $_POST["names"] : array();
     $values = isset($_POST["values"]) ? $_POST["values"] : array();

@@ -1,14 +1,12 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-// Start the session (if not already started)
 session_start();
 
-// Check if the user is not logged in
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
-    // Redirect to the login page or any other page
+
     header("Location: login.php");
-    exit(); // Stop further execution of the script
+    exit(); 
 }
 
 ?>
@@ -20,6 +18,43 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
 $pageTitle = "New Advert";
 include 'head.php';
 ?>
+<style>
+h1, label, .form-control, .btn {
+  font-family: 'Arial', sans-serif; 
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.form-control {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.btn {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .login-container.save-advert {
+    width: auto; 
+  }
+  
+  .form-control, .btn {
+    font-size: 14px; 
+  }
+  
+}
+
+    </style>
 
 <body>
     <?php include_once("navbar.php"); ?>
@@ -33,7 +68,7 @@ include 'head.php';
                     <input type="file" name="photo[]" class="form-control" id="photo" multiple>
                 </div>
             </div>
-            <div class="col-4 my-auto">
+            <div class="col-4">
                 <div>
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
@@ -46,7 +81,7 @@ include 'head.php';
                     <div class="mb-3">
                         <label for="price" class="form-label">Price</label>
                         <div class="input-group">
-                            <input type="text" name="price" class="form-control" id="price" oninput="validatePrice(this)">
+                            <input type="text" name="price" class="form-control" id="price">
                             <span class="input-group-text">$</span>
                         </div>
                     </div>
@@ -67,7 +102,6 @@ include 'head.php';
     <script>
         let features = 0;
 
-        // Yeni eklenen butonun işlevini gerçekleştiren JavaScript fonksiyonu
         function addTextBoxes() {
             features++;
             if (features === 1) {
@@ -75,36 +109,29 @@ include 'head.php';
             }
             var featuresdiv = $("#features");
 
-            // Yeni metin kutularını ekleyin
             var TextBox = $('<div class="mb-3 col-6"><label for="name" class="form-label">Name</label><input type="text" name="names[]" class="form-control" id="name"></div><div class="mb-3 col-6"><label for="value" class="form-label">Value</label><input type="text" name="values[]" class="form-control" id="value"></div>');
 
-            // Yeni metin kutularını formun içine ekleyin
             featuresdiv.append(TextBox);
 
         }
 
         function validatePrice(input) {
-            // Alınan değeri kontrol etmek için bir düzenli ifade kullanın
             var regex = /^[0-9]+$/;
 
             if (input.value.trim() !== "" && !regex.test(input.value)) {
-                // Eğer giriş matematiksel karakterler içermiyorsa
                 alert("Please enter a valid numeric value for the price.");
-                // İsterseniz aşağıdaki satırı kullanarak hatalı girişi temizleyebilirsiniz
                 input.value = input.value.replace(/[^\d]/g, '');
             }
         }
 
         $(document).ready(function() {
-            // Dosya seçildiğinde
+
             $('#photo').on('change', function() {
                 var photoSlider = $('#photoSlider');
-                photoSlider.html(''); // Slider'ı temizle
+                photoSlider.html(''); 
 
-                // Seçilen dosyaları oku
                 var files = $(this)[0].files;
 
-                // En fazla 3 dosya göster
                 for (var i = 0; i < files.length; i++) {
                     var reader = new FileReader();
 
@@ -117,7 +144,6 @@ include 'head.php';
                     reader.readAsDataURL(files[i]);
                 }
 
-                // Slick Carousel'ı başlat
                 photoSlider.slick({
                     dots: true,
                     infinite: true,
@@ -126,19 +152,17 @@ include 'head.php';
                 });
             });
 
-            // Check if the features div is empty when the page loads
             checkFeatures();
         });
 
-        // Function to check if the features div is empty and add a message
         function checkFeatures() {
             var featuresdiv = $("#features");
 
             if (features === 0) {
-                // If empty, add a message
+
                 featuresdiv.html('<h1 class="col-12" style="text-align: center;">Features</h1><p class="col-12" style="text-align: center;">This section is currently empty.</p>');
             } else {
-                // If not empty, remove the message
+
                 featuresdiv.html('<h1 class="col-12" style="text-align: center;">Features</h1>');
             }
         }

@@ -1,11 +1,11 @@
 body {
-  background-color: #f0f2f5;
-  color: #333333;
+  background-color: #f8f9fa; /* Açık gri tonu */
+  color: #333333; /* Koyu metin rengi */
 }
 
 .navbar {
-  background-color: #4a76a8;
-  border-bottom: 2px solid #3a5a78;
+  background-color: #6d7f97; /* Pastel mavi tonu */
+  border-bottom: 2px solid #566482; /* Daha koyu bir mavi tonu */
 }
 
 .nav-link {
@@ -14,6 +14,12 @@ body {
   font-size: 1rem;
   padding: 0.5rem 1rem;
 }
+.nav-link:hover,
+.dropdown-item:hover {
+  background-color: #566482; /* Hover durumunda koyu mavi tonu */
+  color: #dcdcdc; /* Metin rengi açık gri */
+}
+
 .nav-greeting {
   color: #ffffff;
   font-family: "Arial", sans-serif;
@@ -33,7 +39,7 @@ body {
   font-family: "Arial", sans-serif;
 }
 .dropdown-menu {
-  background-color: #2b3035;
+  background-color: #6d7f97; /* Pastel mavi tonu */
 }
 .dropdown-menu a:hover {
   background-color: #3a5a78;
@@ -90,22 +96,28 @@ body {
   border: 1px solid #ced4da;
 }
 
+.form-control,
+.btn {
+  border-radius: 8px; /* Daha yuvarlak köşeler */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge efekti */
+}
 .btn {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: #849db1; /* Açık mavi tonu */
+  border-color: #849db1;
   transition: background-color 0.2s ease-in-out;
   border-radius: 5px;
 }
 
 .btn:hover {
-  background-color: #5a6268;
-  border-color: #545b62;
+  background-color: #6d7f97; /* Hover durumunda koyu mavi tonu */
+  border-color: #566482;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Butonun üzerine gelindiğinde gölge efekti */
 }
 
 .table {
-  --bs-table-bg: #f8f9fa;
-  --bs-table-border-color: transparent;
+  --bs-table-bg: #f8f9fa; /* Tablo arka planı için açık gri */
+  --bs-table-border-color: #ced4da; /* Border rengi açık gri */
   --bs-table-color: #333333;
 }
 
