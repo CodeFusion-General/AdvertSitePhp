@@ -18,7 +18,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Sıralama durumunu ve yönünü kontrol edecek değişkenler
 $order = 'ASC';
 if (isset($_GET['sort']) && $_GET['sort'] === 'desc') {
     $order = 'DESC';
@@ -27,11 +26,9 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'desc') {
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'price'; // Varsayılan sıralama
 $order = isset($_GET['order']) && $_GET['order'] === 'desc' ? 'DESC' : 'ASC';
 
-// Sıralama URL'lerini oluşturma
 $sort_price_link = $_SERVER['PHP_SELF'] . "?sort=price&order=" . ($sort === 'price' && $order === 'ASC' ? 'desc' : 'asc');
 $sort_stars_link = $_SERVER['PHP_SELF'] . "?sort=average_stars&order=" . ($sort === 'average_stars' && $order === 'ASC' ? 'desc' : 'asc');
 
-// Sıralama kriterine göre SQL sorgusu
 $sql = "SELECT advert.*, MIN(advert_photo.photo) AS first_photo,
                COALESCE(AVG(advert_comment.star), 0) AS average_star
         FROM advert
@@ -48,9 +45,9 @@ function display_starsAdverts($rating) {
     $output = '';
     for ($i = 0; $i < 5; $i++) {
         if ($i < $rating) {
-            $output .= '&#9733;'; // Tam yıldız
+            $output .= '&#9733;'; 
         } else {
-            $output .= '&#9734;'; // Boş yıldız
+            $output .= '&#9734;'; 
         }
     }
     return $output;
@@ -88,7 +85,6 @@ function display_starsAdverts($rating) {
                         if ($result->num_rows === 0) {
                             echo "<tr><td colspan='6' style='text-align: center;'>No adverts found</td></tr>";
                         } else {
-                            // Veri çıktısı ve yıldız gösterimi
                             while ($row = $result->fetch_assoc()) {
                                 ?>
                                 <tr>
@@ -110,7 +106,6 @@ function display_starsAdverts($rating) {
                                 <?php
                             }
                         }
-                        // Veritabanı bağlantısını kapat
                         $conn->close();
                         ?>
                     </tbody>

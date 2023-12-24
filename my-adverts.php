@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <?php
-    session_start(); // Oturumu başlat
+    session_start(); 
 
     if (!isset($_SESSION['user_id'])) {
-        // Eğer user_id oturum değişkeni yoksa, kullanıcıyı giriş sayfasına yönlendirin
+
         header("Location: login.php");
         exit();
     }
@@ -23,21 +23,18 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Sıralama türünü ve yönünü kontrol edecek değişkenler
     $order = 'ASC';
-    $sort_type = 'price'; // Varsayılan olarak fiyata göre sırala
+    $sort_type = 'price'; 
     if (isset($_GET['sort'])) {
         $sort_type = $_GET['sort'];
         $order = ($_GET['order'] === 'desc') ? 'DESC' : 'ASC';
     }
 
-    // Sıralama URL'lerini oluştur
     $price_sort_order = ($sort_type === 'price' && $order === 'ASC') ? 'desc' : 'asc';
     $stars_sort_order = ($sort_type === 'average_stars' && $order === 'ASC') ? 'desc' : 'asc';
     $price_sort_link = $_SERVER['PHP_SELF'] . "?sort=price&order=$price_sort_order";
     $stars_sort_link = $_SERVER['PHP_SELF'] . "?sort=average_stars&order=$stars_sort_order";
 
-    // Sıralama türüne göre sorguyu güncelle
     $sort_column = $sort_type === 'average_stars' ? 'average_star' : 'advert.price';
     $sql = "SELECT advert.*, MIN(advert_photo.photo) AS first_photo,
                 COALESCE(AVG(advert_comment.star), 0) AS average_star
@@ -106,7 +103,7 @@
                                 <td class="td-title"><?php echo $row['title']; ?></td>
                                 <td><?php echo $row['description']; ?></td>
                                 <td class="td-photo"><?php echo $row['price']; ?></td>
-                                <td><?php echo display_stars($row['average_star']); ?></td> <!-- Yıldız ortalaması hücresi -->
+                                <td><?php echo display_stars($row['average_star']); ?></td> 
                                 <td class="td-button">
                                     <a class="btn" href="advert-detail.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>"><i class="fa-solid fa-magnifying-glass"></i></a>
                                     <a class="btn" style="margin-left: 3px;" href="update-advert.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>"><i class="fa-solid fa-pen"></i></a>

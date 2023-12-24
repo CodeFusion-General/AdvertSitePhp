@@ -30,7 +30,6 @@
     </div>
 </footer>
 
-<!-- footer stil tanımlamaları -->
 <style>
     .site-footer {
         background-color: #f8f9fa;

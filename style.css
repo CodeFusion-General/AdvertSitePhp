@@ -201,58 +201,51 @@ body {
 }
 
 .form-group.rating {
-  display: flex; /* Flexbox kullanarak yan yana düzenle */
-  align-items: center; /* İçerikleri dikey olarak ortala */
+  display: flex;
+  align-items: center;
 }
 
 .rating-stars {
-  display: flex; /* Yıldızlar için de flexbox kullan */
-  margin-left: 10px; /* Etiketten sonra biraz boşluk bırak */
+  display: flex;
+  margin-left: 10px;
 }
 .rating-stars input {
-  display: none; /* Radyo butonlarını gizle */
+  display: none;
 }
 
 .rating-stars label {
   cursor: pointer;
-  color: #ccc; /* Boş yıldızların rengi */
-  transition: color 0.2s; /* Renk değişim animasyonu */
+  color: #ccc;
+  transition: color 0.2s;
 }
 
-/* Seçili ve hover durumları için yıldız rengini değiştir */
 .rating-stars label:hover,
 .rating-stars label:hover ~ label,
 .rating-stars input:checked ~ label {
-  color: #f5b301; /* Dolu yıldızların rengi */
+  color: #f5b301;
 }
 
-/* Tıklanınca yıldızları küçültme efekti */
 .rating-stars label:active {
   transform: scale(0.8);
 }
 .rating-stars label {
-  padding: 1px; /* padding'i azaltarak yıldızlar arasındaki boşluğu azaltın */
-  font-size: 25px; /* font-size'ı azaltarak yıldız boyutunu küçültün */
+  padding: 1px;
+  font-size: 25px;
 }
 
 .rating-stars {
-  margin-left: 0px; /* Eğer gerekirse, etiketten sonraki boşluğu azaltın */
+  margin-left: 0px;
 }
 
-/* Float'ı kaldırdığımız için bu stil artık gerekli değil */
 .rating-stars label {
-  /* float: right; Kaldırıldı */
   padding: 5px;
   font-size: 30px;
-  /* Diğer stil tanımları */
 }
 
-/* Yıldızların doğru yönde görünmesini sağlayacak yönlendirme */
 .rating-stars {
-  direction: rtl; /* Yıldızları sağdan sola doğru sırala */
+  direction: rtl;
 }
 
-/* Yıldızların içeriğini sol tarafa yönelt */
 .rating-stars label {
-  direction: ltr; /* Yıldızların metin yönünü düzelt */
+  direction: ltr;
 }

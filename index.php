@@ -14,7 +14,7 @@
     if (!isset($_SESSION)) {
         session_start();
     }
-    // Giriş durumunu kontrol et
+
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true): ?>
         <header class="main-header">
             <div class="container">
@@ -27,21 +27,18 @@
     <?php endif; ?>
 
 <?php
-// Veritabanı bağlantı detayları
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "advertphp";
 
-// Bağlantıyı oluştur
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Bağlantıyı kontrol et
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Öne çıkan ilanlar için SQL sorgusu
 $sql = "SELECT advert.id, advert.title, advert.description, advert.price, 
                (SELECT photo FROM advert_photo WHERE advert_photo.advert_id = advert.id LIMIT 1) AS photo,
                COALESCE(AVG(advert_comment.star), 0) AS average_star
@@ -49,11 +46,10 @@ $sql = "SELECT advert.id, advert.title, advert.description, advert.price,
         LEFT JOIN advert_comment ON advert.id = advert_comment.advert_id
         GROUP BY advert.id
         ORDER BY average_star DESC, advert.id DESC
-        LIMIT 10"; // Örnek olarak yıldız puanı yüksek olan son 10 ilanı alabiliriz.
+        LIMIT 10"; 
 
 $result = $conn->query($sql);
 
-// SQL sorgusu sonuçlarını bir diziye aktaralım
 $featuredAdverts = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -107,8 +103,6 @@ if ($result->num_rows > 0) {
         </div>
     </footer>
 
-    <!-- Opsiyonel JavaScript -->
-    <!-- jQuery, Popper.js, Bootstrap JS gibi -->
     <script src="path_to_jquery"></script>
     <script src="path_to_popper"></script>
     <script src="path_to_bootstrap_js"></script>

@@ -83,7 +83,6 @@ if ($resultAdvert->num_rows > 0) {
             </div>
         </div>
         <div class="col-4">
-            <!-- Display fetched advert data -->
             <h1><?php echo $advertData['title']; ?></h1>
             <div style="margin-top: 25px;">
                 <h4>Price: <?php echo $advertData['price']; ?> $</h4>
@@ -111,7 +110,6 @@ if ($resultAdvert->num_rows > 0) {
                 <h4 style="text-align:center;">Description</h4>
                 <p><?php echo $advertData['description']; ?></p>
             </div>
-            <!-- Yorum ve Puanlama Formu -->
             <div class="comment-rating-form">
                 <h3>Leave a Comment and Rating</h3>
                 <form action="backend\comment_rattings.php" method="post">
@@ -150,7 +148,6 @@ if ($resultAdvert->num_rows > 0) {
                     </form>
                 </div>
 
-                <!-- Yorum ve Puanlama Bilgilerinin Gösterilmesi -->
                 <div class="comments-ratings">
                 <h3>Comments and Ratings</h3>
                 <div class="comment-list">
@@ -162,9 +159,9 @@ if ($resultAdvert->num_rows > 0) {
                             $output = '';
                             for ($i = 0; $i < 5; $i++) {
                                 if ($i < $rating) {
-                                    $output .= '&#9733;'; // Tam yıldız
+                                    $output .= '&#9733;'; 
                                 } else {
-                                    $output .= '&#9734;'; // Boş yıldız
+                                    $output .= '&#9734;';
                                 }
                             }
                             return $output;
