@@ -62,7 +62,7 @@ include 'head.php';
 <body>
     <?php include_once("navbar.php"); ?>
     <div class="container">
-        <form class="row login-container save-advert" action="./backend/advert.php?id=<?php echo $row['ID']; ?>" method="post" enctype="multipart/form-data">
+        <form class="row login-container save-advert" action="./backend/advert.php" method="post" enctype="multipart/form-data">
             <h1 class="col-12" style="text-align: center;">Save Advert</h1>
             <div class="col-4">
                 <div id="photoSlider"></div>
