@@ -6,18 +6,6 @@
     <title>Ana Sayfa</title>
     <?php include 'head.php'; ?>
 </head>
-<style>
-.carousel-item img {
-  max-height: 500px; /* Maksimum yükseklik değerini sayfanın yapısına göre ayarlayın */
-  width: auto; /* Genişliği otomatik ayarla, aspect ratio korunur */
-  margin: auto; /* Yatayda merkezleme yapar */
-}
-
-#featuredCarousel {
-  max-height: 500px; 
-  overflow: hidden; 
-}
-        </style>
 
 <body>
     <?php include_once("navbar.php"); ?>
