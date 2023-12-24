@@ -111,8 +111,84 @@ if ($resultAdvert->num_rows > 0) {
                 <h4 style="text-align:center;">Description</h4>
                 <p><?php echo $advertData['description']; ?></p>
             </div>
+            <!-- Yorum ve Puanlama Formu -->
+            <div class="comment-rating-form">
+                <h3>Leave a Comment and Rating</h3>
+                <form action="backend\comment_rattings.php" method="post">
+                    <input type="hidden" name="advert_id" value="<?php echo $targetAdvertId; ?>">
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input type="text" name="title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea name="comment" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group rating">
+                    <label for="rating">Rating:</label>
+                        <div class="rating-stars">
+                            <input id="star5" name="star" type="radio" value="5" class="star"/><label for="star5">&#9733;</label>
+                            <input id="star4" name="star" type="radio" value="4" class="star"/><label for="star4">&#9733;</label>
+                            <input id="star3" name="star" type="radio" value="3" class="star"/><label for="star3">&#9733;</label>
+                            <input id="star2" name="star" type="radio" value="2" class="star"/><label for="star2">&#9733;</label>
+                            <input id="star1" name="star" type="radio" value="1" class="star"/><label for="star1">&#9733;</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
+    <div class="container comments-container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Yorum ve Puanlama Formu -->
+                <!-- <div class="comment-rating-form">
+                    <h3>Leave a Comment and Rating</h3>
+                    <form action="backend/comment_rattings.php" method="post">
+                        <!-- Form alanları ... -->
+                    </form>
+                </div>
+
+                <!-- Yorum ve Puanlama Bilgilerinin Gösterilmesi -->
+                <div class="comments-ratings">
+                <h3>Comments and Ratings</h3>
+                <div class="comment-list">
+                        <?php
+                        $sql3 = "SELECT * FROM advert_comment WHERE advert_id = $targetAdvertId ORDER BY ID DESC";
+                        $resultComments = $conn->query($sql3);
+
+                        function display_stars($rating) {
+                            $output = '';
+                            for ($i = 0; $i < 5; $i++) {
+                                if ($i < $rating) {
+                                    $output .= '&#9733;'; // Tam yıldız
+                                } else {
+                                    $output .= '&#9734;'; // Boş yıldız
+                                }
+                            }
+                            return $output;
+                        }
+
+                        if ($resultComments->num_rows > 0) {
+                            while ($comment = $resultComments->fetch_assoc()) {
+                                echo "<div class='comment-rating-card'>";
+                                echo "<div class='comment-title'>" . htmlspecialchars($comment['title']) . "</div>";
+                                echo "<div class='comment-rating'>" . display_stars($comment['star']) . "</div>";
+                                echo "<div class='comment-text'>" . htmlspecialchars($comment['comment']) . "</div>";
+                                echo "</div>";
+                            }
+                        } else {
+                            echo "<div class='no-comments'>No comments or ratings yet.</div>";
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                
+
 </body>
 
 </html>

@@ -163,3 +163,96 @@ body {
   max-height: 500px;
   overflow: hidden;
 }
+
+.comments-ratings {
+  margin-top: 20px;
+}
+
+.comment-list {
+  margin-top: 10px;
+}
+
+.comment-rating-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.comment-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.comment-rating {
+  color: #f60;
+  margin-top: 5px;
+  font-size: 18px;
+}
+
+.comment-text {
+  margin-top: 10px;
+}
+
+.no-comments {
+  color: #999;
+}
+
+.form-group.rating {
+  display: flex; /* Flexbox kullanarak yan yana düzenle */
+  align-items: center; /* İçerikleri dikey olarak ortala */
+}
+
+.rating-stars {
+  display: flex; /* Yıldızlar için de flexbox kullan */
+  margin-left: 10px; /* Etiketten sonra biraz boşluk bırak */
+}
+.rating-stars input {
+  display: none; /* Radyo butonlarını gizle */
+}
+
+.rating-stars label {
+  cursor: pointer;
+  color: #ccc; /* Boş yıldızların rengi */
+  transition: color 0.2s; /* Renk değişim animasyonu */
+}
+
+/* Seçili ve hover durumları için yıldız rengini değiştir */
+.rating-stars label:hover,
+.rating-stars label:hover ~ label,
+.rating-stars input:checked ~ label {
+  color: #f5b301; /* Dolu yıldızların rengi */
+}
+
+/* Tıklanınca yıldızları küçültme efekti */
+.rating-stars label:active {
+  transform: scale(0.8);
+}
+.rating-stars label {
+  padding: 1px; /* padding'i azaltarak yıldızlar arasındaki boşluğu azaltın */
+  font-size: 25px; /* font-size'ı azaltarak yıldız boyutunu küçültün */
+}
+
+.rating-stars {
+  margin-left: 0px; /* Eğer gerekirse, etiketten sonraki boşluğu azaltın */
+}
+
+/* Float'ı kaldırdığımız için bu stil artık gerekli değil */
+.rating-stars label {
+  /* float: right; Kaldırıldı */
+  padding: 5px;
+  font-size: 30px;
+  /* Diğer stil tanımları */
+}
+
+/* Yıldızların doğru yönde görünmesini sağlayacak yönlendirme */
+.rating-stars {
+  direction: rtl; /* Yıldızları sağdan sola doğru sırala */
+}
+
+/* Yıldızların içeriğini sol tarafa yönelt */
+.rating-stars label {
+  direction: ltr; /* Yıldızların metin yönünü düzelt */
+}

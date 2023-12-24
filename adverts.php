@@ -18,15 +18,48 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch data from the database using a LEFT JOIN to include the first photo for each advert
-$sql = "SELECT advert.*, MIN(advert_photo.photo) AS first_photo
+// Sıralama durumunu ve yönünü kontrol edecek değişkenler
+$order = 'ASC';
+if (isset($_GET['sort']) && $_GET['sort'] === 'desc') {
+    $order = 'DESC';
+}
+
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'price'; // Varsayılan sıralama
+$order = isset($_GET['order']) && $_GET['order'] === 'desc' ? 'DESC' : 'ASC';
+
+// Sıralama URL'lerini oluşturma
+$sort_price_link = $_SERVER['PHP_SELF'] . "?sort=price&order=" . ($sort === 'price' && $order === 'ASC' ? 'desc' : 'asc');
+$sort_stars_link = $_SERVER['PHP_SELF'] . "?sort=average_stars&order=" . ($sort === 'average_stars' && $order === 'ASC' ? 'desc' : 'asc');
+
+// Sıralama kriterine göre SQL sorgusu
+$sql = "SELECT advert.*, MIN(advert_photo.photo) AS first_photo,
+               COALESCE(AVG(advert_comment.star), 0) AS average_star
         FROM advert
         LEFT JOIN advert_photo ON advert.id = advert_photo.advert_id
-        GROUP BY advert.id"; // Assuming advert_id is the common column
+        LEFT JOIN advert_comment ON advert.id = advert_comment.advert_id
+        GROUP BY advert.id
+        ORDER BY 
+            CASE WHEN '$sort' = 'price' THEN advert.price END $order, 
+            CASE WHEN '$sort' = 'average_stars' THEN average_star END $order";
 $result = $conn->query($sql);
+
+// display_stars fonksiyonu
+function display_starsAdverts($rating) {
+    $output = '';
+    for ($i = 0; $i < 5; $i++) {
+        if ($i < $rating) {
+            $output .= '&#9733;'; // Tam yıldız
+        } else {
+            $output .= '&#9734;'; // Boş yıldız
+        }
+    }
+    return $output;
+}
 
 ?>
 
+
+</style>
 <body>
     <?php include_once("navbar.php"); ?>
     <div class="container login-container save-advert row">
@@ -41,37 +74,43 @@ $result = $conn->query($sql);
                             <th scope="col">Photo</th>
                             <th scope="col">Title</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Price</th>
+                            <th scope="col">
+                                <a href="<?php echo $sort_price_link; ?>">Price</a>
+                            </th>
+                            <th scope="col">
+                                <a href="<?php echo $sort_stars_link; ?>">Average Stars</a>
+                            </th>
                             <th scope="col">Details</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
                         <?php
                         if ($result->num_rows === 0) {
-                            echo "<tr><td colspan='5' style='text-align: center;'>No adverts found</td></tr>";
+                            echo "<tr><td colspan='6' style='text-align: center;'>No adverts found</td></tr>";
+                        } else {
+                            // Veri çıktısı ve yıldız gösterimi
+                            while ($row = $result->fetch_assoc()) {
+                                ?>
+                                <tr>
+                                    <td class="td-photo">
+                                        <?php
+                                        if (!empty($row['first_photo'])) {
+                                            echo "<img src='data:image/jpeg;base64," . base64_encode($row['first_photo']) . "' class='table-img' alt='...'>";
+                                        } else {
+                                            echo "No photo available";
+                                        }
+                                        ?>
+                                    </td>
+                                    <td class="td-title"><?php echo htmlspecialchars($row['title']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['description']); ?></td>
+                                    <td class="td-photo"><?php echo htmlspecialchars($row['price']); ?></td>
+                                    <td class="comment-rating"><?php echo display_starsAdverts(round($row['average_star'])); ?></td> <!-- Görsel yıldız gösterimi -->
+                                    <td class="td-button"><a class="btn" href="advert-detail.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+                                </tr>
+                                <?php
+                            }
                         }
-                        
-                        // Loop through the data and display it in the table
-                        while ($row = $result->fetch_assoc()) {
-                        ?>
-                            <tr>
-                                <td class="td-photo">
-                                    <?php
-                                    if (!empty($row['first_photo'])) {
-                                        echo "<img src='data:image/jpeg;base64," . base64_encode($row['first_photo']) . "' class='table-img' alt='...'>";
-                                    } else {
-                                        echo "No photo available";
-                                    }
-                                    ?>
-                                </td>
-                                <td class="td-title"><?php echo $row['title']; ?></td>
-                                <td><?php echo $row['description']; ?></td>
-                                <td class="td-photo"><?php echo $row['price']; ?></td>
-                                <td class="td-button"><a class="btn" href="advert-detail.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>"><i class="fa-solid fa-magnifying-glass"></i></a></td>
-                            </tr>
-                        <?php
-                        }
-                        // Close the database connection
+                        // Veritabanı bağlantısını kapat
                         $conn->close();
                         ?>
                     </tbody>

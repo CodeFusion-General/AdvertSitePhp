@@ -43,10 +43,13 @@ if ($conn->connect_error) {
 
 // Öne çıkan ilanlar için SQL sorgusu
 $sql = "SELECT advert.id, advert.title, advert.description, advert.price, 
-               (SELECT photo FROM advert_photo WHERE advert_photo.advert_id = advert.id LIMIT 1) AS photo
+               (SELECT photo FROM advert_photo WHERE advert_photo.advert_id = advert.id LIMIT 1) AS photo,
+               COALESCE(AVG(advert_comment.star), 0) AS average_star
         FROM advert
-        ORDER BY advert.id DESC
-        LIMIT 10"; // Örnek olarak son 10 ilanı alabiliriz.
+        LEFT JOIN advert_comment ON advert.id = advert_comment.advert_id
+        GROUP BY advert.id
+        ORDER BY average_star DESC, advert.id DESC
+        LIMIT 10"; // Örnek olarak yıldız puanı yüksek olan son 10 ilanı alabiliriz.
 
 $result = $conn->query($sql);
 
