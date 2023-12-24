@@ -49,7 +49,6 @@ include 'head.php';
                         if ($result->num_rows === 0) {
                             echo "<tr><td colspan='5' style='text-align: center;'>No adverts found</td></tr>";
                         }
-
                         while ($row = $result->fetch_assoc()) {
                         ?>
                             <tr>
@@ -65,11 +64,13 @@ include 'head.php';
                                 <td class="td-title"><?php echo $row['title']; ?></td>
                                 <td><?php echo $row['description']; ?></td>
                                 <td class="td-photo"><?php echo $row['price']; ?></td>
-                                <td class="td-button"><a class="btn" href="advert-detail.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+                                <td class="td-button">
+                                    <a class="btn" href="advert-detail.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                    <a class="btn" style="margin-left: 3px;" href="update-advert.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>"><i class="fa-solid fa-pen"></i></a>
+                                </td>
                             </tr>
                         <?php
                         }
-                        
                         $conn->close();
                         ?>
                     </tbody>

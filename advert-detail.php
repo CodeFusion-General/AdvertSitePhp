@@ -5,42 +5,33 @@
 $pageTitle = $_GET['title'] . " - Advert Details";
 include 'head.php';
 
-// Database connection details
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "advertphp";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get the advert ID from the URL parameter
 $targetAdvertId = isset($_GET['id']) ? $_GET['id'] : null;
 
-// Check if advert ID is not provided
 if ($targetAdvertId === null) {
     die("Advert ID not provided");
 }
 
-// Prepare and bind the SQL statement
 $sql = "SELECT * FROM advert WHERE id = $targetAdvertId";
 
 $resultAdvert = $conn->query($sql);
 
-// Fetch data from the result set
 if ($resultAdvert->num_rows > 0) {
-    $advertData = $resultAdvert->fetch_assoc();  // Assigning the fetched data to $advertData
+    $advertData = $resultAdvert->fetch_assoc();  
 
-    // Fetch all photos for the advert
     $sql1 = "SELECT * FROM advert_photo WHERE advert_id = $targetAdvertId";
     $resultPhotos = $conn->query($sql1);
 
-    // Store fetched photos in an array
     $photosData = [];
     while ($photo = $resultPhotos->fetch_assoc()) {
         $photosData[] = $photo;
@@ -49,7 +40,6 @@ if ($resultAdvert->num_rows > 0) {
     $sql2 = "SELECT * FROM advert_field WHERE advert_id = $targetAdvertId";
     $resultFields = $conn->query($sql2);
 
-    // Store fetched fields in an array
     $fieldsData = [];
     while ($field = $resultFields->fetch_assoc()) {
         $fieldsData[] = $field;
