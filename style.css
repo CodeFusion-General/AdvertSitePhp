@@ -135,3 +135,31 @@ body {
   width: 100px;
   text-align: center;
 }
+
+.main-header {
+  text-align: center;
+  padding: 100px 0;
+}
+
+.featured-adverts,
+.how-it-works {
+  padding: 50px 0;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.carousel-item img {
+  max-height: 500px; /* Maksimum yükseklik değerini sayfanın yapısına göre ayarlayın */
+  width: auto; /* Genişliği otomatik ayarla, aspect ratio korunur */
+  margin: auto; /* Yatayda merkezleme yapar */
+}
+
+#featuredCarousel {
+  max-height: 500px;
+  overflow: hidden;
+}
