@@ -1,11 +1,11 @@
 body {
-  background-color: #f8f9fa; /* Açık gri tonu */
+  background-color: #f8f9fa;
   color: #333333; /* Koyu metin rengi */
 }
 
 .navbar {
-  background-color: #6d7f97; /* Pastel mavi tonu */
-  border-bottom: 2px solid #566482; /* Daha koyu bir mavi tonu */
+  background-color: #4a76a8;
+  border-bottom: 2px solid #3a5a78;
 }
 
 .nav-link {
@@ -16,8 +16,8 @@ body {
 }
 .nav-link:hover,
 .dropdown-item:hover {
-  background-color: #566482; /* Hover durumunda koyu mavi tonu */
-  color: #dcdcdc; /* Metin rengi açık gri */
+  background-color: #566482;
+  color: #dcdcdc;
 }
 
 .nav-greeting {
@@ -39,7 +39,7 @@ body {
   font-family: "Arial", sans-serif;
 }
 .dropdown-menu {
-  background-color: #6d7f97; /* Pastel mavi tonu */
+  background-color: #2b3035; /* Pastel mavi tonu */
 }
 .dropdown-menu a:hover {
   background-color: #3a5a78;
@@ -103,7 +103,7 @@ body {
 }
 .btn {
   color: #fff;
-  background-color: #849db1; /* Açık mavi tonu */
+  background-color: #748a9c; /* Açık mavi tonu */
   border-color: #849db1;
   transition: background-color 0.2s ease-in-out;
   border-radius: 5px;
@@ -132,6 +132,6 @@ body {
   width: 200px;
 }
 .td-button {
-  width: 65px;
+  width: 100px;
   text-align: center;
 }

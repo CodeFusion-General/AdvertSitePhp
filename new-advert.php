@@ -19,6 +19,7 @@ $pageTitle = "New Advert";
 include 'head.php';
 ?>
 <style>
+    
 h1, label, .form-control, .btn {
   font-family: 'Arial', sans-serif; 
 }
