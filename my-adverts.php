@@ -36,16 +36,27 @@
     $stars_sort_link = $_SERVER['PHP_SELF'] . "?sort=average_stars&order=$stars_sort_order";
 
     $sort_column = $sort_type === 'average_stars' ? 'average_star' : 'advert.price';
+    // Arama terimi için değişkeni tanımlayın
+    $searchTerm = '';
+    if (isset($_GET['search']) && trim($_GET['search']) != '') {
+        $searchTerm = $_GET['search'];
+    }
+
+    $searchTerm = isset($_GET['search']) ? '%' . $_GET['search'] . '%' : '%';
+
     $sql = "SELECT advert.*, MIN(advert_photo.photo) AS first_photo,
-                COALESCE(AVG(advert_comment.star), 0) AS average_star
+                    COALESCE(AVG(advert_comment.star), 0) AS average_star
             FROM advert
             LEFT JOIN advert_photo ON advert.id = advert_photo.advert_id
             LEFT JOIN advert_comment ON advert.id = advert_comment.advert_id
-            WHERE user_id = " . $_SESSION['user_id'] . "
+            WHERE advert.user_id = ? AND advert.title LIKE ?
             GROUP BY advert.id
             ORDER BY $sort_column $order";
-    $result = $conn->query($sql);
 
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("is", $_SESSION['user_id'], $searchTerm);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     function display_stars($rating) {
         $rating = round($rating);
@@ -67,6 +78,12 @@
             <h1 style="text-align: center;">My Adverts</h1>
         </div>
         <div class="col-12">
+        <div class="search-container">
+            <form action="" method="get">
+                <input type="text" placeholder="Search by title..." name="search" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
             <div>
                 <table class="table">
                     <thead>
@@ -118,6 +135,7 @@
             </div>
         </div>
     </div>
+    
 </body>
 
 </html>

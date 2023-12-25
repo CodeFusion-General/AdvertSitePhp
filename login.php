@@ -26,6 +26,7 @@ include 'head.php';
                 <a href="register.php" class="btn float-right">Register</a>
         </form>
     </div>
+    <?php include 'footer.php'; ?>
 </body>
 
 </html>

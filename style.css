@@ -119,6 +119,29 @@ body {
   --bs-table-bg: #f8f9fa; /* Tablo arka planı için açık gri */
   --bs-table-border-color: #ced4da; /* Border rengi açık gri */
   --bs-table-color: #333333;
+  margin-top: 20px;
+  border-collapse: collapse; /* Tablo hücreler arasındaki boşlukları kaldır */
+  width: 100%;
+}
+.table th a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.table th a:hover {
+  color: #f5b301; /* Bağlantı üzerine gelince renk değişikliği */
+}
+.table th,
+.table td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #ddd; /* Hücreler arası çizgi */
+}
+
+.table th {
+  background-color: #f5f5f5; /* Başlık arkaplan rengi */
+  color: #333;
 }
 
 .table-img {
@@ -166,6 +189,11 @@ body {
 
 .comments-ratings {
   margin-top: 20px;
+}
+
+.comment-rating {
+  color: #f5b301; /* Yıldız rengi */
+  font-size: 18px;
 }
 
 .comment-list {
@@ -248,4 +276,160 @@ body {
 
 .rating-stars label {
   direction: ltr;
+}
+
+/* Arama Kutusu Stili */
+.search-container {
+  float: left;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-container input[type="text"] {
+  width: 300px; /* Arama kutusunun genişliği */
+  padding: 10px;
+  margin-right: -4px; /* Düğme ile arasındaki boşluğu kaldır */
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px; /* Sol tarafta yuvarlak köşeler */
+}
+
+.search-container button {
+  padding: 10px;
+  background: #f5b301; /* Düğme arkaplan rengi */
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0; /* Sağ tarafta yuvarlak köşeler */
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background-color: #e49b0f; /* Düğme üzerine gelince renk değişikliği */
+}
+
+.site-footer {
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 40px 0;
+  border-top: 1px solid #e7e7e7;
+}
+.site-footer ul {
+  list-style: none;
+  padding: 0;
+}
+.site-footer ul li a {
+  color: #333;
+  text-decoration: none;
+}
+.site-footer ul li a:hover {
+  text-decoration: underline;
+}
+.footer-about,
+.footer-nav,
+.footer-contact {
+  margin-bottom: 20px;
+}
+.footer-about h3,
+.footer-nav h3,
+.footer-contact h3 {
+  margin-bottom: 10px;
+}
+.text-center {
+  text-align: center;
+}
+
+/* style-contact.css */
+.site-footer {
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 40px 0;
+  border-top: 1px solid #e7e7e7;
+}
+
+.site-footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.site-footer ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.site-footer ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-about,
+.footer-nav,
+.footer-contact {
+  margin-bottom: 20px;
+}
+
+.footer-about h3,
+.footer-nav h3,
+.footer-contact h3 {
+  margin-bottom: 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* style.css */
+
+/* Genel stil kodları burada bulunur */
+
+.contact-container {
+  text-align: left; /* Yazıları sola hizala */
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-top: 30px;
+}
+
+.contact-container h1 {
+  margin-top: 0;
+}
+
+.contact-container p {
+  margin-bottom: 20px;
+}
+
+.contact-container form {
+  margin-top: 20px;
+}
+
+.contact-container .form-group {
+  margin-bottom: 15px;
+}
+
+.contact-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.contact-container input[type="text"],
+.contact-container input[type="email"],
+.contact-container textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-container button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #333;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact-container button[type="submit"]:hover {
+  background: #555;
 }

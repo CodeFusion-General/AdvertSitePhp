@@ -46,5 +46,6 @@
             <a href="login.php" class="btn float-right">Back to Login</a>
         </form>
     </div>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

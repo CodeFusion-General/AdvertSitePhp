@@ -29,32 +29,3 @@
         </div>
     </div>
 </footer>
-
-<style>
-    .site-footer {
-        background-color: #f8f9fa;
-        color: #333;
-        padding: 40px 0;
-        border-top: 1px solid #e7e7e7;
-    }
-    .site-footer ul {
-        list-style: none;
-        padding: 0;
-    }
-    .site-footer ul li a {
-        color: #333;
-        text-decoration: none;
-    }
-    .site-footer ul li a:hover {
-        text-decoration: underline;
-    }
-    .footer-about, .footer-nav, .footer-contact {
-        margin-bottom: 20px;
-    }
-    .footer-about h3, .footer-nav h3, .footer-contact h3 {
-        margin-bottom: 10px;
-    }
-    .text-center {
-        text-align: center;
-    }
-</style>
