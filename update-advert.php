@@ -40,7 +40,7 @@ $sql = "SELECT * FROM advert WHERE id = $targetAdvertId";
 $resultAdvert = $conn->query($sql);
 
 if ($resultAdvert->num_rows > 0) {
-    $advertData = $resultAdvert->fetch_assoc();  
+    $advertData = $resultAdvert->fetch_assoc();
 
     $sql1 = "SELECT * FROM advert_photo WHERE advert_id = $targetAdvertId";
     $resultPhotos = $conn->query($sql1);
@@ -106,8 +106,11 @@ if ($resultAdvert->num_rows > 0) {
 <body>
     <?php include_once("navbar.php"); ?>
     <div class="container">
-        <form class="row login-container save-advert" action="./backend/advert.php?id=<?php echo $row['ID']; ?>" method="put" enctype="multipart/form-data">
-            <h1 class="col-12" style="text-align: center;">Save Advert</h1>
+        <form class="row login-container save-advert" action="./backend/advert.php?id=<?php echo $advertData['ID']; ?>" method="post" enctype="multipart/form-data">
+            <!-- Add the following hidden input field to simulate the PUT method -->
+            <input type="hidden" name="_method" value="PUT">
+
+            <h1 class="col-12" style="text-align: center;">Update Advert</h1>
             <div class="col-4">
                 <div id="photoSlider"></div>
                 <div class="mb-3">
@@ -141,9 +144,10 @@ if ($resultAdvert->num_rows > 0) {
             </div>
             <div style="text-align: center;" class="col-12">
                 <button type="button" class="btn" onclick="addTextBoxes()">Add Feature</button>
-                <button type="submit" class="btn">Save Advert</button>
+                <button type="submit" class="btn">Update Advert</button>
             </div>
         </form>
+
     </div>
 
     <script>
@@ -177,7 +181,6 @@ if ($resultAdvert->num_rows > 0) {
             $('#photo').on('change', function() {
                 var files = $(this)[0].files;
 
-                // Slider'ı temizle ve yeniden başlat
                 if (photoSlider.hasClass('slick-initialized')) {
                     photoSlider.slick('unslick');
                     photoSlider.html('');
@@ -258,8 +261,6 @@ if ($resultAdvert->num_rows > 0) {
             });
         }
     </script>
-
-
 </body>
 
 </html>

@@ -154,9 +154,25 @@ body {
 .td-title {
   width: 200px;
 }
-.td-button {
-  width: 120px;
+.td-button{
+  width: 65px;
   text-align: center;
+}
+.td-avgstar{
+  width: 130px;
+}
+.td-button-my-advert{
+  width: 170px;
+}
+.td-button-my-advert a,
+.td-button-my-advert form {
+  display: inline-block; /* İçerikleri inline-block olarak ayarla */
+  vertical-align: middle; /* İçerikleri dikey olarak ortala */
+  margin-left: 3px; /* Sol tarafta 3px boşluk bırak */
+}
+
+.td-button-my-advert form {
+  margin: 0; /* Form etiketindeki varsayılan dış boşluğu kaldır */
 }
 
 .main-header {
@@ -192,6 +208,7 @@ body {
 }
 
 .comment-rating {
+  width: 130px;
   color: #f5b301; /* Yıldız rengi */
   font-size: 18px;
 }

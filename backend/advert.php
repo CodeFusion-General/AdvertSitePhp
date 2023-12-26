@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["_method"]) && $_POST["_method"] == "PUT") {
     session_start();
 
     $servername = "localhost";
@@ -16,6 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    $targetAdvertId = isset($_GET['id']) ? $_GET['id'] : null;
+    echo $targetAdvertId;
+
     $title = $_POST["title"];
     $description = $_POST["description"];
     $price = str_replace(',', '.', $_POST['price']);
@@ -28,15 +31,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $featuresArray[$names[$i]] = $values[$i];
     }
 
-    $sql1 = "INSERT INTO advert (user_id, title, description, price) VALUES ('{$_SESSION['user_id']}', '$title', '$description', '$price')";
+    $sql = "UPDATE advert SET title = '$title', description = '$description', price = '$price' WHERE id = $targetAdvertId";
 
-    if ($conn->query($sql1) === TRUE) {
+    if ($conn->query($sql) === TRUE) {
     } else {
-        cancelFunction();
+         cancelFunction();
     }
 
-    $sql = "SELECT id FROM advert WHERE title='$title' and description='$description'";
-    $result = $conn->query($sql);
+    $sql1 = "SELECT id FROM advert WHERE title='$title' and description='$description'";
+    $result = $conn->query($sql1);
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -45,6 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Data not found.";
     }
+
+    $sql2 = "DELETE FROM advert_field WHERE advert_id='$advert_id'";
+    $conn->query($sql2);
+
+    $sql3 = "DELETE FROM advert_photo WHERE advert_id='$advert_id'";
+    $conn->query($sql3);
 
     foreach ($featuresArray as $key => $value) {
         $sql2 = "INSERT INTO advert_field (advert_id, name, value) VALUES ('$advert_id','$key', '$value')";
@@ -78,12 +87,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     echo "<script>
-            alert('Advert successfully added');
+            alert('Advert successfully updated.');
             window.location.href='http://localhost/AdvertSitePhp/new-advert.php';
         </script>";
 
     $conn->close();
-} else if ($_SERVER["REQUEST_METHOD"] == "PUT") {
+} else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["_method"]) && $_POST["_method"] == "DELETE") {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "advertphp";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $targetAdvertId = isset($_GET['id']) ? $_GET['id'] : null;
+    if ($targetAdvertId === null) {
+        die("Advert ID not provided");
+    }
+    $sql = "DELETE FROM advert WHERE id = $targetAdvertId";
+    $result = $conn->query($sql);
+
+    echo "<script>
+            alert('Advert successfully deleted.');
+            window.location.href='http://localhost/AdvertSitePhp/my-adverts.php';
+        </script>";
+} else {
     session_start();
 
     $servername = "localhost";
@@ -163,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo "<script>
             alert('Advert successfully added');
-            window.location.href='http://localhost/AdvertSitePhp/new-advert.php';
+            window.location.href='http://localhost/AdvertSitePhp/my-adverts.php';
         </script>";
 
     $conn->close();
