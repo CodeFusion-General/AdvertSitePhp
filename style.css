@@ -155,7 +155,7 @@ body {
   width: 200px;
 }
 .td-button {
-  width: 110px;
+  width: 120px;
   text-align: center;
 }
 
@@ -339,10 +339,15 @@ body {
 
 /* style-contact.css */
 .site-footer {
+  left: 0;
+  bottom: 0; /* Footer'ı ekranın altına yerleştir */
+  width: 100%; /* Footer'ın tam sayfa genişliğine uzanmasını sağlar */
   background-color: #f8f9fa;
   color: #333;
-  padding: 40px 0;
+  padding: 5px 0;
   border-top: 1px solid #e7e7e7;
+  /* Footer içeriğinin altında ekstra boşluk oluşturmak için */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Alt gölge ekler */
 }
 
 .site-footer ul {
@@ -375,9 +380,22 @@ body {
   text-align: center;
 }
 
-/* style.css */
+.price-stars {
+  display: flex;
+  align-items: center;
+}
 
-/* Genel stil kodları burada bulunur */
+.price-stars h4 {
+  margin-right: 10px;
+}
+.average-stars {
+  display: inline-block;
+  margin-left: 10px; /* İstenilen boşluğu ayarlayın */
+  /* Gerekli diğer stil özellikleri */
+  color: #f5b301;
+  /* font size */
+  font-size: 28px;
+}
 
 .contact-container {
   text-align: left; /* Yazıları sola hizala */

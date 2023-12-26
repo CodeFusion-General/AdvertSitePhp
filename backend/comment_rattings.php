@@ -16,15 +16,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $comment = $_POST["comment"];
     $star = $_POST["star"];
     $title = $_POST["title"]; 
+    $advert_title=$_POST["advert_title"];
 
     $stmt = $conn->prepare("INSERT INTO advert_comment (advert_id, title, comment, star) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("isss", $advert_id, $title, $comment, $star);
    
 
     if ($stmt->execute()) {
-        echo "Yorum ve puan başarıyla kaydedildi.";
+        echo '<script>alert("Yorum ve Puanlama başarıyla kaydedildi");</script>';
+        echo '<script>window.location.href = "http://localhost/AdvertSitePhp/advert-detail.php?id='.$advert_id.'&title='.$advert_title.'"</script>';
     } else {
-        echo "Hata: " . $stmt->error;
+        echo '<script>alert("Hata !");</script>'. $stmt->error;
+
     }
 
     $stmt->close();

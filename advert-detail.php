@@ -47,6 +47,19 @@ if ($resultAdvert->num_rows > 0) {
 } else {
     echo "No data found";
 }
+
+function display_stars($rating) {
+    $output = '';
+    for ($i = 0; $i < 5; $i++) {
+        if ($i < $rating) {
+            $output .= '&#9733;'; 
+        } else {
+            $output .= '&#9734;';
+        }
+    }
+    return $output;
+}
+
 ?>
 
 <body>
@@ -85,7 +98,21 @@ if ($resultAdvert->num_rows > 0) {
         <div class="col-4">
             <h1><?php echo $advertData['title']; ?></h1>
             <div style="margin-top: 25px;">
-                <h4>Price: <?php echo $advertData['price']; ?> $</h4>
+            <?php
+// İlan için yapılan yorumların ortalama yıldız puanını al
+$sqlAverageStars = "SELECT AVG(star) as average_star FROM advert_comment WHERE advert_id = ?";
+$stmt = $conn->prepare($sqlAverageStars);
+$stmt->bind_param("i", $targetAdvertId);
+$stmt->execute();
+$resultAverageStars = $stmt->get_result();
+$averageStarsRow = $resultAverageStars->fetch_assoc();
+$averageStars = $averageStarsRow['average_star'] ?? 0; // Eğer sonuç boşsa, 0 değeri atanacak
+
+// Daha sonra, ilanın fiyat bilgisi yanında ortalama yıldızları göster
+?>
+
+<h4>Price: <?php echo $advertData['price']; ?> $ <span class="average-stars"><?php echo display_stars(round($averageStars)); ?></span></h4>
+
                 <h4 style="text-align:center;">Features</h4>
                 <table class="table">
                     <thead>
@@ -108,12 +135,13 @@ if ($resultAdvert->num_rows > 0) {
                     </tbody>
                 </table>
                 <h4 style="text-align:center;">Description</h4>
-                <p><?php echo $advertData['description']; ?></p>
+                <p style="word-wrap: break-word;"><?php echo htmlspecialchars($advertData['description']); ?></p>
             </div>
             <div class="comment-rating-form">
                 <h3>Leave a Comment and Rating</h3>
                 <form action="backend\comment_rattings.php" method="post">
                     <input type="hidden" name="advert_id" value="<?php echo $targetAdvertId; ?>">
+                    <input type="hidden" name="advert_title"value="<?php echo $advertData['title']; ?>">
                     <div class="form-group">
                         <label for="title">Title:</label>
                         <input type="text" name="title" class="form-control" required>
@@ -155,17 +183,7 @@ if ($resultAdvert->num_rows > 0) {
                         $sql3 = "SELECT * FROM advert_comment WHERE advert_id = $targetAdvertId ORDER BY ID DESC";
                         $resultComments = $conn->query($sql3);
 
-                        function display_stars($rating) {
-                            $output = '';
-                            for ($i = 0; $i < 5; $i++) {
-                                if ($i < $rating) {
-                                    $output .= '&#9733;'; 
-                                } else {
-                                    $output .= '&#9734;';
-                                }
-                            }
-                            return $output;
-                        }
+
 
                         if ($resultComments->num_rows > 0) {
                             while ($comment = $resultComments->fetch_assoc()) {

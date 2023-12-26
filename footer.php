@@ -29,3 +29,18 @@
         </div>
     </div>
 </footer>
+<style>
+.container {
+  width: 100%; /* Container'ı tam sayfa genişliğine ayarlar */
+  max-width: 1200px; /* Maksimum genişlik */
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
+  display: flex; /* Flexbox ile çocuk div'leri yan yana diz */
+  flex-wrap: wrap; /* İçerik fazla olduğunda yeni satıra geçer */
+}
+</style>

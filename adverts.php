@@ -120,8 +120,17 @@ function display_starsAdverts($rating) {
                                         ?>
                                     </td>
                                     <td class="td-title"><?php echo htmlspecialchars($row['title']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['description']); ?></td>
-                                    <td class="td-photo"><?php echo htmlspecialchars($row['price']); ?></td>
+                                    <td>
+                                        <?php
+                                        $description = $row['description'];
+                                        if (strlen($description) > 155) {
+                                            echo htmlspecialchars(substr($description, 0, 155)) . "...";
+                                        } else {
+                                            echo htmlspecialchars($description);
+                                        }
+                                        ?>
+                                    </td>
+                                    <td class="td-photo"><?php echo htmlspecialchars($row['price']); ?> $</td>
                                     <td class="comment-rating"><?php echo display_starsAdverts(round($row['average_star'])); ?></td> <!-- Görsel yıldız gösterimi -->
                                     <td class="td-button"><a class="btn" href="advert-detail.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>"><i class="fa-solid fa-magnifying-glass"></i></a></td>
                                 </tr>

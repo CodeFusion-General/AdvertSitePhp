@@ -117,9 +117,18 @@
                                     }
                                     ?>
                                 </td>
-                                <td class="td-title"><?php echo $row['title']; ?></td>
-                                <td><?php echo $row['description']; ?></td>
-                                <td class="td-photo"><?php echo $row['price']; ?></td>
+                                <td class="td-title"><?php echo htmlspecialchars($row['title']); ?></td>
+                                    <td>
+                                        <?php
+                                        $description = $row['description'];
+                                        if (strlen($description) > 155) {
+                                            echo htmlspecialchars(substr($description, 0, 155)) . "...";
+                                        } else {
+                                            echo htmlspecialchars($description);
+                                        }
+                                        ?>
+                                    </td>
+                                <td class="td-photo"><?php echo $row['price']; ?> $</td>
                                 <td><?php echo display_stars($row['average_star']); ?></td> 
                                 <td class="td-button">
                                     <a class="btn" href="advert-detail.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>"><i class="fa-solid fa-magnifying-glass"></i></a>

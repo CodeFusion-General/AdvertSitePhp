@@ -8,11 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check the connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    // Retrieve form data
+
     $username = $_POST["username"];
     $password = $_POST["password"];
     $email = $_POST["email"];
@@ -22,25 +21,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address = $_POST["address"];
     $birthdate = $_POST["birthdate"];
 
-    // Check if the username already exists
     $checkUsernameSql = "SELECT id FROM account WHERE username = '$username'";
     $resultUsername = $conn->query($checkUsernameSql);
 
     if ($resultUsername->num_rows > 0) {
-        // Username already exists, show an alert
+
         echo '<script>alert("Username already exists. Please choose a different username.");</script>';
         echo '<script>window.location.href = "http://localhost/AdvertSitePhp/register.php";</script>';
     } else {
-        // Username is unique, proceed with registration
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        // Insert data into the 'users' table
         $sql = "INSERT INTO user (email, name, surname, phone, address, birthdate)
                 VALUES ('$email', '$name', '$surname', '$phone', '$address', '$birthdate')";
 
         if ($conn->query($sql) === TRUE) {
-            // Get the user ID
+
             $sql1 = "SELECT id FROM user WHERE (email = '$email' AND name = '$name' AND surname = '$surname' AND phone = '$phone' AND address = '$address' AND birthdate = '$birthdate')";
             $result = $conn->query($sql1);
 
@@ -52,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Data not found.";
             }
 
-            // Insert data into the 'account' table
             $sql2 = "INSERT INTO account (user_id, username, password) VALUES ('$user_id', '$username', '$hashedPassword')";
 
             if ($conn->query($sql2) === TRUE) {
