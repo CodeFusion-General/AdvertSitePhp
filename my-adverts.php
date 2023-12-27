@@ -131,11 +131,16 @@ function display_stars($rating)
                             <td class="td-photo"><?php echo $row['price']; ?> $</td>
                             <td class="comment-rating"><?php echo display_stars($row['average_star']); ?></td>
                             <td class="td-button-my-advert">
-                                <a class="btn" href="advert-detail.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                <a class="btn" style="margin-left: 3px;" href="update-advert.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>"><i class="fa-solid fa-pen"></i></a>
+                                <a class="btn btn-search" href="advert-detail.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>">
+                                    <i class="fa fa-magnifying-glass"></i>
+                                </a>
+                                <a class="btn btn-edit" href="update-advert.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>">
+                                    <i class="fa fa-pen"></i>
+                                </a>
+                               
                                 <form method="POST" action="./backend/advert.php?id=<?php echo $row['ID']; ?>">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn" style="margin-left: 3px;" type="submit"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="btn btn-delete" style="margin-left: 3px;" type="submit"><i class="fa-solid fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

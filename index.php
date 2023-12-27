@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ana Sayfa</title>
+    <title>Home Page</title>
     <?php include 'head.php'; ?>
 </head>
 
@@ -18,10 +18,10 @@
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true): ?>
         <header class="main-header">
             <div class="container">
-                <h1>Hoş Geldiniz!</h1>
-                <p>Bizimle birlikte keşfedin, ilan verin ve bulun.</p>
-                <a href="register.php" class="btn btn-primary">Kayıt Ol</a>
-                <a href="login.php" class="btn btn-secondary">Giriş Yap</a>
+                <h1>Welcome!</h1>
+                <p>Explore, advertise and find with us.</p>
+                <a href="register.php" class="btn btn-primary">Register</a>
+                <a href="login.php" class="btn btn-secondary">Login</a>
             </div>
         </header>
     <?php endif; ?>
@@ -62,30 +62,29 @@ if ($result->num_rows > 0) {
 
     <section class="featured-adverts">
         <div class="container">
-            <h2>Öne Çıkan İlanlar</h2>
+            <h2>Featured Ads</h2>
             <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-        <?php foreach ($featuredAdverts as $key => $advert): ?>
-            <div class="carousel-item <?php echo ($key == 0) ? 'active' : ''; ?>">
-                <a href="/AdvertSitePhp/advert-detail.php?id=<?php echo $advert['id']; ?>&title=<?php echo urlencode($advert['title']); ?>">
-                    <img src="data:image/jpeg;base64,<?php echo base64_encode($advert['photo']); ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($advert['title']); ?>">
-                </a>
-                <div class="carousel-caption d-none d-md-block">
-                    <h5><?php echo htmlspecialchars($advert['title']); ?></h5>
+                <div class="carousel-inner">
+                    <?php foreach ($featuredAdverts as $key => $advert): ?>
+                        <div class="carousel-item <?php echo ($key == 0) ? 'active' : ''; ?>">
+                            <a href="/AdvertSitePhp/advert-detail.php?id=<?php echo $advert['id']; ?>&title=<?php echo urlencode($advert['title']); ?>">
+                                <img src="data:image/jpeg;base64,<?php echo base64_encode($advert['photo']); ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($advert['title']); ?>">
+                            </a>
+                            <div class="carousel-caption">
+                                <h5><?php echo htmlspecialchars($advert['title']); ?></h5>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-        <?php endforeach; ?>
-
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
         </div>
     </section>
 

@@ -1,6 +1,6 @@
 body {
   background-color: #f8f9fa;
-  color: #333333; /* Koyu metin rengi */
+  color: #333333;
 }
 
 .navbar {
@@ -39,7 +39,7 @@ body {
   font-family: "Arial", sans-serif;
 }
 .dropdown-menu {
-  background-color: #2b3035; /* Pastel mavi tonu */
+  background-color: #2b3035;
 }
 .dropdown-menu a:hover {
   background-color: #3a5a78;
@@ -98,29 +98,29 @@ body {
 
 .form-control,
 .btn {
-  border-radius: 8px; /* Daha yuvarlak köşeler */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge efekti */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .btn {
   color: #fff;
-  background-color: #748a9c; /* Açık mavi tonu */
+  background-color: #748a9c;
   border-color: #849db1;
   transition: background-color 0.2s ease-in-out;
   border-radius: 5px;
 }
 
 .btn:hover {
-  background-color: #6d7f97; /* Hover durumunda koyu mavi tonu */
+  background-color: #6d7f97;
   border-color: #566482;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Butonun üzerine gelindiğinde gölge efekti */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .table {
-  --bs-table-bg: #f8f9fa; /* Tablo arka planı için açık gri */
-  --bs-table-border-color: #ced4da; /* Border rengi açık gri */
+  --bs-table-bg: #f8f9fa;
+  --bs-table-border-color: #ced4da;
   --bs-table-color: #333333;
   margin-top: 20px;
-  border-collapse: collapse; /* Tablo hücreler arasındaki boşlukları kaldır */
+  border-collapse: collapse;
   width: 100%;
 }
 .table th a {
@@ -130,17 +130,17 @@ body {
 }
 
 .table th a:hover {
-  color: #f5b301; /* Bağlantı üzerine gelince renk değişikliği */
+  color: #f5b301;
 }
 .table th,
 .table td {
   text-align: left;
   padding: 12px;
-  border-bottom: 1px solid #ddd; /* Hücreler arası çizgi */
+  border-bottom: 1px solid #ddd;
 }
 
 .table th {
-  background-color: #f5f5f5; /* Başlık arkaplan rengi */
+  background-color: #f5f5f5;
   color: #333;
 }
 
@@ -154,21 +154,21 @@ body {
 .td-title {
   width: 200px;
 }
-.td-button{
+.td-button {
   width: 65px;
   text-align: center;
 }
-.td-avgstar{
+.td-avgstar {
   width: 130px;
 }
-.td-button-my-advert{
+.td-button-my-advert {
   width: 170px;
 }
 .td-button-my-advert a,
 .td-button-my-advert form {
-  display: inline-block; /* İçerikleri inline-block olarak ayarla */
-  vertical-align: middle; /* İçerikleri dikey olarak ortala */
-  margin-left: 3px; /* Sol tarafta 3px boşluk bırak */
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 3px;
 }
 
 .td-button-my-advert form {
@@ -193,14 +193,33 @@ body {
 }
 
 .carousel-item img {
-  max-height: 500px; /* Maksimum yükseklik değerini sayfanın yapısına göre ayarlayın */
-  width: auto; /* Genişliği otomatik ayarla, aspect ratio korunur */
-  margin: auto; /* Yatayda merkezleme yapar */
+  max-height: 400px; /* Adjust this value as needed */
+  width: auto;
+  max-width: 85%;
+  margin: auto;
+  display: block;
 }
 
 #featuredCarousel {
-  max-height: 500px;
+  position: relative; /* Pozisyon referansını ayarla */
+  max-height: 400px;
   overflow: hidden;
+  margin-top: 50px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%; /* Butonları dikey olarak ortala */
+  transform: translateY(-50%); /* Dikey merkezleme için */
+}
+
+.carousel-control-prev {
+  left: 50px; /* Sol butonu sola hizala */
+}
+
+.carousel-control-next {
+  right: 50px; /* Sağ butonu sağa hizala */
 }
 
 .comments-ratings {
@@ -209,12 +228,50 @@ body {
 
 .comment-rating {
   width: 130px;
-  color: #f5b301; /* Yıldız rengi */
+  color: #f5b301;
   font-size: 18px;
 }
 
 .comment-list {
   margin-top: 10px;
+}
+
+.comment-rating-form {
+  background-color: #f8f9fa; /* Açık gri bir arka plan rengi */
+  border-radius: 4px; /* Köşeleri yuvarlaklaştır */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif bir gölge ekle */
+  padding: 20px; /* İçeriden biraz boşluk ekle */
+  margin-top: 30px; /* Üstten boşluk ekle */
+}
+
+.comment-rating-form h3 {
+  color: #333; /* Başlık rengi */
+  margin-bottom: 15px; /* Başlık altından boşluk ekle */
+}
+
+.form-group {
+  margin-bottom: 15px; /* Form grupları arasında boşluk ekle */
+}
+
+.rating-stars {
+  display: flex; /* Yıldızları yan yana göster */
+  justify-content: flex-start; /* Yıldızları sola hizala */
+}
+
+.rating-stars input[type="radio"] {
+  display: none; /* Radyo butonlarını gizle */
+}
+
+.rating-stars label {
+  font-size: 24px; /* Yıldızların boyutunu büyüt */
+  color: #ffc107; /* Yıldızların rengini altın sarısı yap */
+  cursor: pointer; /* Fareyi üzerine getirdiğinde imleç şeklini değiştir */
+  margin-right: 0.5px; /* Yıldızlar arasında boşluk ekle */
+}
+
+.rating-stars label:hover,
+.rating-stars label:hover ~ label {
+  color: #fadb14; /* Üzerine gelindiğinde yıldızların rengini değiştir */
 }
 
 .comment-rating-card {
@@ -295,7 +352,6 @@ body {
   direction: ltr;
 }
 
-/* Arama Kutusu Stili */
 .search-container {
   float: left;
   margin-bottom: 20px;
@@ -303,24 +359,24 @@ body {
 }
 
 .search-container input[type="text"] {
-  width: 300px; /* Arama kutusunun genişliği */
+  width: 300px;
   padding: 10px;
-  margin-right: -4px; /* Düğme ile arasındaki boşluğu kaldır */
+  margin-right: -4px;
   border: 1px solid #ddd;
-  border-radius: 4px 0 0 4px; /* Sol tarafta yuvarlak köşeler */
+  border-radius: 4px 0 0 4px;
 }
 
 .search-container button {
   padding: 10px;
-  background: #f5b301; /* Düğme arkaplan rengi */
+  background: #f5b301;
   color: white;
   border: none;
-  border-radius: 0 4px 4px 0; /* Sağ tarafta yuvarlak köşeler */
+  border-radius: 0 4px 4px 0;
   cursor: pointer;
 }
 
 .search-container button:hover {
-  background-color: #e49b0f; /* Düğme üzerine gelince renk değişikliği */
+  background-color: #e49b0f;
 }
 
 .site-footer {
@@ -354,17 +410,15 @@ body {
   text-align: center;
 }
 
-/* style-contact.css */
 .site-footer {
   left: 0;
-  bottom: 0; /* Footer'ı ekranın altına yerleştir */
-  width: 100%; /* Footer'ın tam sayfa genişliğine uzanmasını sağlar */
+  bottom: 0;
+  width: 100%;
   background-color: #f8f9fa;
   color: #333;
   padding: 5px 0;
   border-top: 1px solid #e7e7e7;
-  /* Footer içeriğinin altında ekstra boşluk oluşturmak için */
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Alt gölge ekler */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .site-footer ul {
@@ -407,15 +461,15 @@ body {
 }
 .average-stars {
   display: inline-block;
-  margin-left: 10px; /* İstenilen boşluğu ayarlayın */
-  /* Gerekli diğer stil özellikleri */
+  margin-left: 10px;
+
   color: #f5b301;
-  /* font size */
+
   font-size: 28px;
 }
 
 .contact-container {
-  text-align: left; /* Yazıları sola hizala */
+  text-align: left;
   padding: 20px;
   background: #fff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -467,4 +521,19 @@ body {
 
 .contact-container button[type="submit"]:hover {
   background: #555;
+}
+
+.btn-search {
+  background-color: blue;
+  color: white;
+}
+
+.btn-edit {
+  background-color: green;
+  color: white;
+}
+
+.btn-delete {
+  background-color: red;
+  color: white;
 }

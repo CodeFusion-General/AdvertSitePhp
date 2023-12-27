@@ -23,38 +23,34 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'desc') {
     $order = 'DESC';
 }
 
-$sort = isset($_GET['sort']) ? $_GET['sort'] : 'price'; // Varsayılan sıralama
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'price';
 $order = isset($_GET['order']) && $_GET['order'] === 'desc' ? 'DESC' : 'ASC';
 
 $sort_price_link = $_SERVER['PHP_SELF'] . "?sort=price&order=" . ($sort === 'price' && $order === 'ASC' ? 'desc' : 'asc');
 $sort_stars_link = $_SERVER['PHP_SELF'] . "?sort=average_stars&order=" . ($sort === 'average_stars' && $order === 'ASC' ? 'desc' : 'asc');
 
-// Arama terimi kontrolü
 $search = '';
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
 }
 
-// Sıralama ve arama koşulları ile güncellenmiş SQL sorgusu
 $sql = "SELECT advert.*, MIN(advert_photo.photo) AS first_photo,
                COALESCE(AVG(advert_comment.star), 0) AS average_star
         FROM advert
         LEFT JOIN advert_photo ON advert.id = advert_photo.advert_id
         LEFT JOIN advert_comment ON advert.id = advert_comment.advert_id
-        WHERE advert.title LIKE ? -- Arama koşulu
+        WHERE advert.title LIKE ? 
         GROUP BY advert.id
         ORDER BY 
             CASE WHEN '$sort' = 'price' THEN advert.price END $order, 
             CASE WHEN '$sort' = 'average_stars' THEN average_star END $order";
 
-// Hazırlıklı ifade ile güvenli bir şekilde arama terimi ekleme
 $stmt = $conn->prepare($sql);
 $searchTerm = "%$search%";
 $stmt->bind_param("s", $searchTerm);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// display_stars fonksiyonu
 function display_starsAdverts($rating) {
     $output = '';
     for ($i = 0; $i < 5; $i++) {
@@ -66,7 +62,6 @@ function display_starsAdverts($rating) {
     }
     return $output;
 }
-
 
 
 ?>
@@ -132,7 +127,12 @@ function display_starsAdverts($rating) {
                                     </td>
                                     <td class="td-photo"><?php echo htmlspecialchars($row['price']); ?> $</td>
                                     <td class="comment-rating"><?php echo display_starsAdverts(round($row['average_star'])); ?></td> <!-- Görsel yıldız gösterimi -->
-                                    <td class="td-button"><a class="btn" href="advert-detail.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+                                    <td class="td-button">
+                                        <a class="btn btn-search" href="advert-detail.php?id=<?php echo $row['ID']; ?>&title=<?php echo $row['title']; ?>">
+                                            <i class="fa fa-magnifying-glass"></i>
+                                        </a>
+                                    </td>
+                                    
                                 </tr>
                                 <?php
                             }
