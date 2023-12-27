@@ -90,11 +90,33 @@ if ($result->num_rows > 0) {
 
     <section class="how-it-works">
         <div class="container">
-            <h2>Nasıl Çalışır?</h2>
-            <p>Sitemizde ilan vermek veya ilanlara göz atmak oldukça kolay. İşte adımlar:</p>
-            <!-- Adımları açıklayan içerik -->
+            <h2>How It Works</h2>
+            <p>Posting an ad or browsing listings on our site is quite simple. Here are the steps:</p>
+            <div class="steps">
+                <div class="step">
+                    <h3>Sign Up</h3>
+                    <p>The first step is to sign up on our site. You can start by clicking the 'Register' button.</p>
+                </div>
+                <div class="step">
+                    <h3>Create Your Listing</h3>
+                    <p>After signing up, click on the 'Post Ad' option to easily create your listing.</p>
+                </div>
+                <div class="step">
+                    <h3>Publish Your Ad</h3>
+                    <p>Once you've tailored your ad to your satisfaction, hit the 'Publish' button to make your ad go live.</p>
+                </div>
+                <div class="step">
+                    <h3>Browse Listings</h3>
+                    <p>Use the 'Browse Ads' option to explore listings posted by other users.</p>
+                </div>
+                <div class="step">
+                    <h3>Get in Touch</h3>
+                    <p>If you find an ad that interests you, you can directly contact the ad owner.</p>
+                </div>
+            </div>
         </div>
     </section>
+
 
     <footer>
         <div class="container">
