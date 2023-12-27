@@ -107,19 +107,19 @@ function display_stars($rating) {
             <h1><?php echo $advertData['title']; ?></h1>
             <div style="margin-top: 25px;">
             <?php
-// İlan için yapılan yorumların ortalama yıldız puanını al
-$sqlAverageStars = "SELECT AVG(star) as average_star FROM advert_comment WHERE advert_id = ?";
-$stmt = $conn->prepare($sqlAverageStars);
-$stmt->bind_param("i", $targetAdvertId);
-$stmt->execute();
-$resultAverageStars = $stmt->get_result();
-$averageStarsRow = $resultAverageStars->fetch_assoc();
-$averageStars = $averageStarsRow['average_star'] ?? 0; // Eğer sonuç boşsa, 0 değeri atanacak
+                // İlan için yapılan yorumların ortalama yıldız puanını al
+                $sqlAverageStars = "SELECT AVG(star) as average_star FROM advert_comment WHERE advert_id = ?";
+                $stmt = $conn->prepare($sqlAverageStars);
+                $stmt->bind_param("i", $targetAdvertId);
+                $stmt->execute();
+                $resultAverageStars = $stmt->get_result();
+                $averageStarsRow = $resultAverageStars->fetch_assoc();
+                $averageStars = $averageStarsRow['average_star'] ?? 0; // Eğer sonuç boşsa, 0 değeri atanacak
 
-// Daha sonra, ilanın fiyat bilgisi yanında ortalama yıldızları göster
-?>
+                // Daha sonra, ilanın fiyat bilgisi yanında ortalama yıldızları göster
+            ?>
 
-<h4>Price: <?php echo $advertData['price']; ?> $ <span class="average-stars"><?php echo display_stars(round($averageStars)); ?></span></h4>
+            <h4>Price: <?php echo $advertData['price']; ?> $ <span class="average-stars"><?php echo display_stars(round($averageStars)); ?></span></h4>
 
                 <h4 style="text-align:center;">Features</h4>
                 <table class="table">
@@ -144,32 +144,6 @@ $averageStars = $averageStarsRow['average_star'] ?? 0; // Eğer sonuç boşsa, 0
                 </table>
                 <h4 style="text-align:center;">Description</h4>
                 <p style="word-wrap: break-word;"><?php echo htmlspecialchars($advertData['description']); ?></p>
-            </div>
-            <div class="comment-rating-form">
-                <h3>Leave a Comment and Rating</h3>
-                <form action="backend\comment_rattings.php" method="post">
-                    <input type="hidden" name="advert_id" value="<?php echo $targetAdvertId; ?>">
-                    <input type="hidden" name="advert_title"value="<?php echo $advertData['title']; ?>">
-                    <div class="form-group">
-                        <label for="title">Title:</label>
-                        <input type="text" name="title" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="comment">Comment:</label>
-                        <textarea name="comment" class="form-control" required></textarea>
-                    </div>
-                    <div class="form-group rating">
-                    <label for="rating">Rating:</label>
-                        <div class="rating-stars">
-                            <input id="star5" name="star" type="radio" value="5" class="star"/><label for="star5">&#9733;</label>
-                            <input id="star4" name="star" type="radio" value="4" class="star"/><label for="star4">&#9733;</label>
-                            <input id="star3" name="star" type="radio" value="3" class="star"/><label for="star3">&#9733;</label>
-                            <input id="star2" name="star" type="radio" value="2" class="star"/><label for="star2">&#9733;</label>
-                            <input id="star1" name="star" type="radio" value="1" class="star"/><label for="star1">&#9733;</label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
             </div>
         </div>
     </div>
@@ -210,8 +184,32 @@ $averageStars = $averageStarsRow['average_star'] ?? 0; // Eğer sonuç boşsa, 0
             </div>
         </div>
     </div>
-                
-
+    <div class="comment-rating-form login-container save-advert">
+                <h3>Leave a Comment and Rating</h3>
+                <form action="backend\comment_rattings.php" method="post">
+                    <input type="hidden" name="advert_id" value="<?php echo $targetAdvertId; ?>">
+                    <input type="hidden" name="advert_title"value="<?php echo $advertData['title']; ?>">
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input type="text" name="title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea name="comment" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group rating">
+                    <label for="rating">Rating:</label>
+                        <div class="rating-stars">
+                            <input id="star5" name="star" type="radio" value="5" class="star"/><label for="star5">&#9733;</label>
+                            <input id="star4" name="star" type="radio" value="4" class="star"/><label for="star4">&#9733;</label>
+                            <input id="star3" name="star" type="radio" value="3" class="star"/><label for="star3">&#9733;</label>
+                            <input id="star2" name="star" type="radio" value="2" class="star"/><label for="star2">&#9733;</label>
+                            <input id="star1" name="star" type="radio" value="1" class="star"/><label for="star1">&#9733;</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+    </div>
 </body>
 
 </html>

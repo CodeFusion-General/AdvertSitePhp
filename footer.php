@@ -1,4 +1,4 @@
-<footer class="site-footer">
+<footer  class="site-footer<?php if(basename($_SERVER['PHP_SELF']) === "index.php") { echo " how-it-works";} ?>">
     <div class="container">
         <div class="row">
             <div class="footer-about col-md-4">
