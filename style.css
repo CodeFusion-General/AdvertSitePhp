@@ -172,7 +172,7 @@ body {
 }
 
 .td-button-my-advert form {
-  margin: 0; /* Form etiketindeki varsayılan dış boşluğu kaldır */
+  margin: 0;
 }
 
 .main-header {
@@ -193,7 +193,7 @@ body {
 }
 
 .carousel-item img {
-  max-height: 400px; /* Adjust this value as needed */
+  max-height: 400px;
   width: auto;
   max-width: 85%;
   margin: auto;
@@ -201,7 +201,7 @@ body {
 }
 
 #featuredCarousel {
-  position: relative; /* Pozisyon referansını ayarla */
+  position: relative;
   max-height: 400px;
   overflow: hidden;
   margin-top: 50px;
@@ -210,16 +210,16 @@ body {
 .carousel-control-prev,
 .carousel-control-next {
   position: absolute;
-  top: 50%; /* Butonları dikey olarak ortala */
-  transform: translateY(-50%); /* Dikey merkezleme için */
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .carousel-control-prev {
-  left: 50px; /* Sol butonu sola hizala */
+  left: 50px;
 }
 
 .carousel-control-next {
-  right: 50px; /* Sağ butonu sağa hizala */
+  right: 50px;
 }
 
 .comments-ratings {
@@ -237,41 +237,41 @@ body {
 }
 
 .comment-rating-form {
-  background-color: #f8f9fa; /* Açık gri bir arka plan rengi */
-  border-radius: 4px; /* Köşeleri yuvarlaklaştır */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif bir gölge ekle */
-  padding: 20px; /* İçeriden biraz boşluk ekle */
-  margin-top: 30px; /* Üstten boşluk ekle */
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 30px;
 }
 
 .comment-rating-form h3 {
-  color: #333; /* Başlık rengi */
-  margin-bottom: 15px; /* Başlık altından boşluk ekle */
+  color: #333;
+  margin-bottom: 15px;
 }
 
 .form-group {
-  margin-bottom: 15px; /* Form grupları arasında boşluk ekle */
+  margin-bottom: 15px;
 }
 
 .rating-stars {
-  display: flex; /* Yıldızları yan yana göster */
-  justify-content: flex-start; /* Yıldızları sola hizala */
+  display: flex;
+  justify-content: flex-start;
 }
 
 .rating-stars input[type="radio"] {
-  display: none; /* Radyo butonlarını gizle */
+  display: none;
 }
 
 .rating-stars label {
-  font-size: 24px; /* Yıldızların boyutunu büyüt */
-  color: #ffc107; /* Yıldızların rengini altın sarısı yap */
-  cursor: pointer; /* Fareyi üzerine getirdiğinde imleç şeklini değiştir */
-  margin-right: 0.5px; /* Yıldızlar arasında boşluk ekle */
+  font-size: 24px;
+  color: #ffc107;
+  cursor: pointer;
+  margin-right: 0.5px;
 }
 
 .rating-stars label:hover,
 .rating-stars label:hover ~ label {
-  color: #fadb14; /* Üzerine gelindiğinde yıldızların rengini değiştir */
+  color: #fadb14;
 }
 
 .comment-rating-card {
@@ -536,4 +536,63 @@ body {
 .btn-delete {
   background-color: red;
   color: white;
+}
+
+.how-it-works {
+  background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+  padding: 60px 0;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.how-it-works h2 {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.how-it-works p {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.step {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  margin-bottom: 30px;
+}
+
+.step:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.step h3 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.step p {
+  line-height: 1.7;
+  color: #4a4a4a;
+}
+
+@media (max-width: 768px) {
+  .how-it-works h2 {
+    font-size: 2rem;
+  }
+
+  .step h3 {
+    font-size: 1.5rem;
+  }
+
+  .how-it-works p,
+  .step p {
+    font-size: 1rem;
+  }
 }
