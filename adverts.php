@@ -144,7 +144,6 @@ function display_starsAdverts($rating) {
             </div>
         </div>
     </div>
-    
 </body>
 
 </html>

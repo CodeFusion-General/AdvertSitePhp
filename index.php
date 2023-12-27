@@ -60,37 +60,37 @@ if ($result->num_rows > 0) {
 
 ?>
 
-    <section class="featured-adverts">
-        <div class="container">
-            <h2>Featured Ads</h2>
-            <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <?php foreach ($featuredAdverts as $key => $advert): ?>
-                        <?php if (!empty($advert['photo'])):  ?>
-                            <div class="carousel-item <?php echo ($key == 0) ? 'active' : ''; ?>">
-                                <a href="/AdvertSitePhp/advert-detail.php?id=<?php echo $advert['id']; ?>&title=<?php echo urlencode($advert['title']); ?>">
-                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($advert['photo']); ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($advert['title']); ?>">
-                                </a>
-                                <div class="carousel-caption">
-                                    <h5><?php echo htmlspecialchars($advert['title']); ?></h5>
-                                </div>
+<section class="featured-adverts">
+    <div class="container">
+        <h2>Featured Ads</h2>
+        <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <?php foreach ($featuredAdverts as $key => $advert): ?>
+                    <?php if (!empty($advert['photo'])): ?>
+                        <div class="carousel-item <?php echo ($key == 0) ? 'active' : ''; ?>">
+                            <a href="/AdvertSitePhp/advert-detail.php?id=<?php echo $advert['id']; ?>&title=<?php echo urlencode($advert['title']); ?>">
+                                <img src="data:image/jpeg;base64,<?php echo base64_encode($advert['photo']); ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($advert['title']); ?>">
+                            </a>
+                            <div class="carousel-caption">
+                                <h5><?php echo htmlspecialchars($advert['title']); ?></h5>
                             </div>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-                <?php if (count($featuredAdverts) > 1):?>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
+            <?php if (count($featuredAdverts) > 1): ?>
+                <a class="carousel-control-prev" href="#featuredCarousel" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#featuredCarousel" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </a>
+            <?php endif; ?>
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="how-it-works">
         <div class="container">

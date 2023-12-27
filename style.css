@@ -147,6 +147,11 @@ body {
 .table-img {
   max-width: 90px;
   max-height: 50px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.table-img:hover {
+  transform: scale(2.15); /* Resmi %3 oranında büyüt */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Hover durumunda gölgeyi arttır */
 }
 .td-photo {
   width: 100px;
@@ -180,11 +185,6 @@ body {
   padding: 100px 0;
 }
 
-.featured-adverts,
-.how-it-works {
-  padding: 50px 0;
-}
-
 .footer {
   background-color: #333;
   color: white;
@@ -192,26 +192,69 @@ body {
   text-align: center;
 }
 
-.carousel-item img {
-  max-height: 400px;
-  width: auto;
+.featured-adverts h2 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2em;
+  margin-top: 1em;
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.featured-adverts .carousel {
+  position: relative;
+}
+
+.featured-adverts .carousel-item {
+  position: relative;
+}
+
+.featured-adverts .carousel-item img {
+  display: block;
+  max-height: 600px;
   max-width: 85%;
   margin: auto;
-  display: block;
+  width: fit-content;
+  height: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Normal gölge */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animasyon süresi ve türü */
 }
 
-#featuredCarousel {
-  position: relative;
-  max-height: 400px;
-  overflow: hidden;
-  margin-top: 50px;
+.featured-adverts .carousel-item img:hover {
+  transform: scale(1.03); /* Resmi %3 oranında büyüt */
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* Hover durumunda gölgeyi arttır */
 }
 
-.carousel-control-prev,
-.carousel-control-next {
+.featured-adverts .carousel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.featured-adverts .carousel-control-prev,
+.featured-adverts .carousel-control-next {
+  filter: invert(100%); /* Makes the controls white */
+}
+
+.featured-adverts .carousel-control-prev-icon,
+.featured-adverts .carousel-control-next-icon {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%); /* Replace with your own icon */
+}
+
+/* Add responsive adjustments as necessary */
+@media (max-width: 768px) {
+  .featured-adverts .carousel-caption {
+    padding: 5px; /* Smaller padding on mobile */
+  }
 }
 
 .carousel-control-prev {
@@ -396,11 +439,16 @@ body {
 .site-footer ul li a:hover {
   text-decoration: underline;
 }
+
 .footer-about,
 .footer-nav,
 .footer-contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* İçerikleri dikey olarak eşit aralıklı yapar */
   margin-bottom: 20px;
 }
+
 .footer-about h3,
 .footer-nav h3,
 .footer-contact h3 {
