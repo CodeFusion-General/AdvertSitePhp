@@ -170,25 +170,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["_method"]) && $_POST["
             cancelFunction();
         }
     }
-
     if (!empty($photos)) {
         foreach ($photos['tmp_name'] as $index => $photo) {
-            if (!empty($photo) && is_uploaded_file($photo)) {
-                $pht = file_get_contents($photo);
-
-                $sql3 = $conn->prepare("INSERT INTO advert_photo (advert_id, photo) VALUES ('$advert_id', ?)");
-                $sql3->bind_param("s", $pht);
-
-                if ($sql3->execute()) {
+            if(!empty($photo)) {
+                if (is_uploaded_file($photo)) {
+                    $pht = file_get_contents($photo);
+    
+                    $sql3 = $conn->prepare("INSERT INTO advert_photo (advert_id, photo) VALUES ('$advert_id', ?)");
+                    $sql3->bind_param("s", $pht);
+    
+                    if ($sql3->execute()) {
+                    } else {
+                        $isErrorPhoto = true;
+                        cancelFunction();
+                    }
+    
+                    $sql3->close();
                 } else {
                     $isErrorPhoto = true;
                     cancelFunction();
                 }
-
-                $sql3->close();
-            } else {
-                $isErrorPhoto = true;
-                cancelFunction();
             }
         }
     }

@@ -75,24 +75,32 @@ function display_stars($rating) {
                     }
                     ?>
                 </div>
-                <div class="carousel-inner">
-                    <?php
+                <?php
+                if($resultPhotos->num_rows === 0) {
+                    echo "<div class='carousel-item active'>";
+                    echo "<img src='https://via.placeholder.com/600x400?text=No+photos' class='d-block w-100' alt='...'>";
+                    echo "</div>";
+                }
+                else {
+                    echo '<div class="carousel-inner">';
+               
                     foreach ($photosData as $key => $photo) {
                         $activeClass = ($key == 0) ? 'active' : '';
                         echo "<div class='carousel-item $activeClass'>";
                         echo "<img src='data:image/jpeg;base64," . base64_encode($photo['photo']) . "' class='d-block w-100' alt='...'>";
                         echo "</div>";
                     }
-                    ?>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    echo '</div>';
+                echo '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                </button>';
+                echo '<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
-                </button>
+                </button>';
+                }
+                ?>
             </div>
         </div>
         <div class="col-4">
