@@ -28,18 +28,18 @@ if ($result->num_rows > 0) {
         $_SESSION['username'] = $username;
         $_SESSION['user_id'] = $row['user_id'];
 
-        header('Location: http://localhost/AdvertSitePhp/index.php');
+        header('Location: http://localhost:8080/AdvertSitePhp/index.php');
         exit();
     } else {
         
         echo '<script>alert("Wrong username or password.");</script>';
-        echo '<script>window.location.href = "http://localhost/AdvertSitePhp/login.php";</script>';
+        echo '<script>window.location.href = "http://localhost:8080/AdvertSitePhp/login.php";</script>';
         exit();
     }
 } else {
 
     echo '<script>alert("Wrong username or password.");</script>';
-    echo '<script>window.location.href = "http://localhost/AdvertSitePhp/login.php";</script>';
+    echo '<script>window.location.href = "http://localhost:8080/AdvertSitePhp/login.php";</script>';
     exit();
 }
 

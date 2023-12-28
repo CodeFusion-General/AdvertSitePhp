@@ -3,19 +3,18 @@
         <div class="row">
             <div class="footer-about col-md-4">
                 <h3>Hakkımızda</h3>
-                <p>Biz, müşterilerimize en iyi hizmeti sunmayı hedefleyen bir ilan platformuyuz.</p>
+                <p>We are an advertisement platform that aims to provide the best service to our customers.</p>
             </div>
             <div class="footer-nav col-md-4">
                 <h3>Navigasyon</h3>
                 <ul>
-                    <li><a href="index.php">Ana Sayfa</a></li>
-                    <li><a href="adverts.php">İlanlar</a></li>
-                    <li><a href="contact.php">İletişim</a></li>
-                    <!-- Diğer navigasyon linkleri -->
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="adverts.php">Adverts</a></li>
+                    <li><a href="contact.php">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-contact col-md-4">
-                <h3>İletişim</h3>
+                <h3>Contact</h3>
                 <ul>
                 <li><a href="mailto:info@example.com">muhammedsogut@stu.aydin.edu.tr</a></li>
                     <li><a href="mailto:info@example.com">kadir.ugurlu@stu.aydin.edu.tr</a></li>
@@ -24,7 +23,7 @@
         </div>
         <div class="row">
             <div class="col-12 text-center">
-                <p>&copy; <?= date("Y"); ?> IAU Computer Engineering Tüm hakları saklıdır.</p>
+                <p>&copy; <?= date("Y"); ?> IAU Computer Engineering All rights reserved.</p>
             </div>
         </div>
     </div>

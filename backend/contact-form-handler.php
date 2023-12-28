@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo '<script>alert("Mesajınız başarıyla gönderildi.");</script>';
-        echo '<script>window.location.href = "http://localhost/AdvertSitePhp/";</script>';
+        echo '<script>window.location.href = "http://localhost:8080/AdvertSitePhp/";</script>';
     } else {
         echo '<script>alert("Hata.");</script>' . $stmt->error;
     }

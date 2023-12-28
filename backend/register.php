@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($resultUsername->num_rows > 0) {
 
         echo '<script>alert("Username already exists. Please choose a different username.");</script>';
-        echo '<script>window.location.href = "http://localhost/AdvertSitePhp/register.php";</script>';
+        echo '<script>window.location.href = "http://localhost:8080/AdvertSitePhp/register.php";</script>';
     } else {
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($conn->query($sql2) === TRUE) {
                 echo '<script>alert("Registration successful!");</script>';
-                echo '<script>window.location.href = "http://localhost/AdvertSitePhp/login.php";</script>';
+                echo '<script>window.location.href = "http://localhost:8080/AdvertSitePhp/login.php";</script>';
             } else {
                 die("Error: " . $sql2 . "<br>" . $conn->error);
             }

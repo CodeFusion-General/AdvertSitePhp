@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["_method"]) && $_POST["
 
     echo "<script>
             alert('Advert successfully updated.');
-            window.location.href='http://localhost/AdvertSitePhp/new-advert.php';
+            window.location.href='http://localhost:8080/AdvertSitePhp/new-advert.php';
         </script>";
 
     $conn->close();
@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["_method"]) && $_POST["
 
     echo "<script>
             alert('Advert successfully deleted.');
-            window.location.href='http://localhost/AdvertSitePhp/my-adverts.php';
+            window.location.href='http://localhost:8080/AdvertSitePhp/my-adverts.php';
         </script>";
 } else {
     session_start();
@@ -196,7 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["_method"]) && $_POST["
 
     echo "<script>
             alert('Advert successfully added');
-            window.location.href='http://localhost/AdvertSitePhp/my-adverts.php';
+            window.location.href='http://localhost:8080/AdvertSitePhp/my-adverts.php';
         </script>";
 
     $conn->close();
@@ -213,7 +213,7 @@ function cancelFunction()
         $conn->query($sql1);
         echo "<script>
                 alert('Error on saving field');
-                window.location.href='http://localhost/AdvertSitePhp/new-advert.php';
+                window.location.href='http://localhost:8080/AdvertSitePhp/new-advert.php';
             </script>";
         die();
     } else if ($isErrorPhoto == true) {
@@ -223,13 +223,13 @@ function cancelFunction()
         $conn->query($sql2);
         echo "<script>
                 alert('Error on saving photo');
-                window.location.href='http://localhost/AdvertSitePhp/new-advert.php';
+                window.location.href='http://localhost:8080/AdvertSitePhp/new-advert.php';
             </script>";
         die();
     } else {
         echo "<script>
                 alert('Error on saving advert');
-                window.location.href='http://localhost/AdvertSitePhp/new-advert.php';
+                window.location.href='http://localhost:8080/AdvertSitePhp/new-advert.php';
             </script>";
         die();
     }
