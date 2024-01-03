@@ -34,22 +34,26 @@ if (isset($_GET['search'])) {
     $search = $_GET['search'];
 }
 
+$searchTerm = mysqli_real_escape_string($conn, $search);
+
 $sql = "SELECT advert.*, MIN(advert_photo.photo) AS first_photo,
                COALESCE(AVG(advert_comment.star), 0) AS average_star
         FROM advert
         LEFT JOIN advert_photo ON advert.id = advert_photo.advert_id
         LEFT JOIN advert_comment ON advert.id = advert_comment.advert_id
-        WHERE advert.title LIKE ? 
+        WHERE advert.title LIKE '%$searchTerm%' 
         GROUP BY advert.id
         ORDER BY 
-            CASE WHEN '$sort' = 'price' THEN advert.price END $order, 
-            CASE WHEN '$sort' = 'average_stars' THEN average_star END $order";
+            CASE WHEN '$sort' = 'price' THEN advert.price 
+                 WHEN '$sort' = 'average_stars' THEN COALESCE(AVG(advert_comment.star), 0)
+            END $order";
 
-$stmt = $conn->prepare($sql);
-$searchTerm = "%$search%";
-$stmt->bind_param("s", $searchTerm);
-$stmt->execute();
-$result = $stmt->get_result();
+
+$result = $conn->query($sql);
+
+if (!$result) {
+    die("Query failed: (" . $conn->errno . ") " . $conn->error);
+}
 
 function display_starsAdverts($rating) {
     $output = '';

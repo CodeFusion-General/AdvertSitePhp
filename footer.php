@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="footer-about col-md-4">
-                <h3>Hakkımızda</h3>
+                <h3>About Us</h3>
                 <p>We are an advertisement platform that aims to provide the best service to our customers.</p>
             </div>
             <div class="footer-nav col-md-4">

@@ -23,10 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
 
     if ($stmt->execute()) {
-        echo '<script>alert("Yorum ve Puanlama başarıyla kaydedildi");</script>';
+        echo '<script>alert("Comment and rating are successfully saved.");</script>';
         echo '<script>window.location.href = "http://localhost:8080/AdvertSitePhp/advert-detail.php?id='.$advert_id.'&title='.$advert_title.'"</script>';
     } else {
-        echo '<script>alert("Hata !");</script>'. $stmt->error;
+        echo '<script>alert("Error !");</script>'. $stmt->error;
 
     }
 
