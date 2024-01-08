@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["_method"]) && $_POST["
     $description = $_POST["description"];
     $price = str_replace(',', '.', $_POST['price']);
     $photos = isset($_FILES["photo"]) ? $_FILES["photo"] : array();
+    $old_photos = isset($_POST["old_photos"]) ? $_POST["old_photos"] : array();
     $names = isset($_POST["names"]) ? $_POST["names"] : array();
     $values = isset($_POST["values"]) ? $_POST["values"] : array();
     $featuresArray = array();
@@ -64,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["_method"]) && $_POST["
         }
     }
 
-    if (!empty($photos)) {
+    if (!empty($photos['name'][0])) {
         foreach ($photos['tmp_name'] as $index => $photo) {
             if (!empty($photo) && is_uploaded_file($photo)) {
                 $pht = file_get_contents($photo);
@@ -84,11 +85,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["_method"]) && $_POST["
                 cancelFunction();
             }
         }
+    }  else if (!empty($old_photos)) {
+        foreach ($old_photos as $base64Image) {
+            $decodedImage = base64_decode($base64Image);
+    
+            $sql3 = $conn->prepare("INSERT INTO advert_photo (advert_id, photo) VALUES (?, ?)");
+            $sql3->bind_param("is", $advert_id, $decodedImage);
+    
+            if (!$sql3->execute()) {
+                $isErrorPhoto = true;
+                cancelFunction();
+            }
+    
+            $sql3->close();
+        }
     }
+    
 
     echo "<script>
             alert('Advert successfully updated.');
-            window.location.href='http://localhost:8080/AdvertSitePhp/new-advert.php';
+            window.location.href='http://localhost/AdvertSitePhp/new-advert.php';
         </script>";
 
     $conn->close();
@@ -113,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["_method"]) && $_POST["
 
     echo "<script>
             alert('Advert successfully deleted.');
-            window.location.href='http://localhost:8080/AdvertSitePhp/my-adverts.php';
+            window.location.href='http://localhost/AdvertSitePhp/my-adverts.php';
         </script>";
 } else {
     session_start();
@@ -196,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["_method"]) && $_POST["
 
     echo "<script>
             alert('Advert successfully added');
-            window.location.href='http://localhost:8080/AdvertSitePhp/my-adverts.php';
+            window.location.href='http://localhost/AdvertSitePhp/my-adverts.php';
         </script>";
 
     $conn->close();
@@ -213,7 +229,7 @@ function cancelFunction()
         $conn->query($sql1);
         echo "<script>
                 alert('Error on saving field');
-                window.location.href='http://localhost:8080/AdvertSitePhp/new-advert.php';
+                window.location.href='http://localhost/AdvertSitePhp/new-advert.php';
             </script>";
         die();
     } else if ($isErrorPhoto == true) {
@@ -223,13 +239,13 @@ function cancelFunction()
         $conn->query($sql2);
         echo "<script>
                 alert('Error on saving photo');
-                window.location.href='http://localhost:8080/AdvertSitePhp/new-advert.php';
+                window.location.href='http://localhost/AdvertSitePhp/new-advert.php';
             </script>";
         die();
     } else {
         echo "<script>
                 alert('Error on saving advert');
-                window.location.href='http://localhost:8080/AdvertSitePhp/new-advert.php';
+                window.location.href='http://localhost/AdvertSitePhp/new-advert.php';
             </script>";
         die();
     }

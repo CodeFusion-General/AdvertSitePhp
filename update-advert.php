@@ -107,9 +107,12 @@ if ($resultAdvert->num_rows > 0) {
     <?php include_once("navbar.php"); ?>
     <div class="container">
         <form class="row login-container save-advert" action="./backend/advert.php?id=<?php echo $advertData['ID']; ?>" method="post" enctype="multipart/form-data">
-            <!-- Add the following hidden input field to simulate the PUT method -->
             <input type="hidden" name="_method" value="PUT">
-
+            <?php
+                foreach ($photosData as $photo) {
+                    echo '<input type="hidden" name="old_photos[]" value="' . $photo['photo'] . '">';
+                }            
+            ?>
             <h1 class="col-12" style="text-align: center;">Update Advert</h1>
             <div class="col-4">
                 <div id="photoSlider"></div>
